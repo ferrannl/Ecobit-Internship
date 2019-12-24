@@ -50,7 +50,11 @@
     <Compile Include="Repository\PrivilegeRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.4.0</Version>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ecobit.Database\Ecobit.Database.sqlproj">
       <Project>{8f3c7538-03bb-4ae7-849a-78b1ffe9f69f}</Project>

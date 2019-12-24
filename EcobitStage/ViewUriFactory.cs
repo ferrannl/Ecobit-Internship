@@ -18,9 +18,12 @@ namespace EcobitStage
         public ViewUriFactory()
         {
             _uris = new Dictionary<string, Uri>();
-            _uris["UserPrivilegeView"] = new Uri("UserPrivilegeView.xaml", UriKind.Relative);
+            _uris["UserPrivilegeView"] = new Uri("UserPrivilegeListView.xaml", UriKind.Relative);
             _uris["AccountView"] = new Uri("AccountView.xaml", UriKind.Relative);
             _uris["LoginView"] = new Uri("LoginView.xaml", UriKind.Relative);
+            _uris["UserView"] = new Uri("UserListView.xaml", UriKind.Relative);
+            _uris["PrivilegeView"] = new Uri("PrivilegeListView.xaml", UriKind.Relative);
+
         }
 
         public Uri GetUri(string page)
