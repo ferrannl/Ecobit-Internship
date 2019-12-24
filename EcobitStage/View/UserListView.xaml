@@ -74,11 +74,11 @@
                         <DataGridTextColumn
                             Width="100*"
                             Binding="{Binding LastName}"
-                            Header="Contactpersoon" />
+                            Header="Achternaam" />
                         <DataGridTextColumn
                             Width="100*"
                             Binding="{Binding EMail}"
-                            Header="Telefoonnummer" />
+                            Header="E-mail" />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

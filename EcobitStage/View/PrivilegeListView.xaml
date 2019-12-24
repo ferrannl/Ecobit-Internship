@@ -9,8 +9,73 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Border BorderThickness="10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
 
-    <Grid>
-        <Button>privilegelistview</Button>
-    </Grid>
+                <TextBlock VerticalAlignment="Center" FontSize="25">Toegankelijkheden</TextBlock>
+                <!--   <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Command="{Binding RefreshCommand}"
+                    Style="{StaticResource Refresh}" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Command="{Binding NewCommand}"
+                    Style="{StaticResource Plus}" />
+                -->
+            </Grid>
+            <StackPanel>
+                <DockPanel Margin="0,5">
+                    <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
+                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button
+                        Width="50"
+                        Margin="5,0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding SearchCommand}"
+                        Content="Zoek" />
+                </DockPanel>
+                <DataGrid
+                    Height="300"
+                    AutoGenerateColumns="False"
+                    Background="White"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ObservableCustomers}"
+                    SelectedItem="{Binding SelectedPrivilege}"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="45"
+                            Binding="{Binding Name}"
+                            Header="Naam" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Border>
 </Page>
