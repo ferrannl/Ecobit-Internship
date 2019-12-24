@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="EcobitStage.View.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EcobitStage.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Login"
+    Width="800"
+    Height="450"
+    MinWidth="575"
+    MinHeight="280"
+    d:DesignHeight="280"
+    d:DesignWidth="575"
+    Background="White"
+    DataContext="{Binding Login, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Background="LightGray">
+        <StackPanel Margin="10">
+            <Label
+                Width="220"
+                HorizontalContentAlignment="Center"
+                Content="Inloggen"
+                FontWeight="Bold" />
+            <StackPanel Orientation="Horizontal">
+                <Label Width="110" Content="Gebruikersnaam:" />
+                <TextBox
+                    Width="106"
+                    Height="20"
+                    Margin="2,3,2,2"
+                    HorizontalAlignment="Left"
+                    Text="{Binding Username}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Width="110" Content="Wachtwoord:" />
+                <PasswordBox
+                    Name="PasswordBox"
+                    Width="106"
+                    Height="20"
+                    Margin="2,3,2,2"
+                    HorizontalAlignment="Left">
+                    <PasswordBox.InputBindings>
+                        <KeyBinding
+                            Key="Enter"
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=PasswordBox}" />
+                    </PasswordBox.InputBindings>
+                </PasswordBox>
+            </StackPanel>
+            <Button
+                Width="150"
+                Height="20"
+                Margin="2,2,2,2"
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding ElementName=PasswordBox}"
+                Content="Inloggen" />
+        </StackPanel>
+    </StackPanel>
+</Page>
