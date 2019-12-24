@@ -59,8 +59,8 @@
                     CanUserResizeColumns="False"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding ObservableCustomers}"
-                    SelectedItem="{Binding SelectedCustomer}"
+                    ItemsSource="{Binding ObservableUsers}"
+                    SelectedItem="{Binding SelectedUser}"
                     SelectionMode="Single">
                     <DataGrid.Columns>
                         <DataGridTextColumn

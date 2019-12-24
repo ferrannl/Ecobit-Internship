@@ -58,7 +58,7 @@
                     CanUserResizeColumns="False"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding ObservableCustomers}"
+                    ItemsSource="{Binding ObservablePrivileges}"
                     SelectedItem="{Binding SelectedPrivilege}"
                     SelectionMode="Single">
                     <DataGrid.Columns>
