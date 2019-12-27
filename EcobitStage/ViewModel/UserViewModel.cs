@@ -1,5 +1,4 @@
-﻿using Ecobit.Domain;
-using EcobitStage.DataTransfer;
+﻿
 using EcobitStage.Offline;
 using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
@@ -37,9 +36,9 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
-        public DataViewModel.User SelectedUser { get; set; }
-        private List<Ecobit.Domain.User> _users = new List<Ecobit.Domain.User>();
-        public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
+        public User SelectedUser { get; set; }
+        private List<User> _users = new List<User>();
+        public ObservableCollection<User> ObservableUsers { get; set; }
 
         public UserViewModel()
         {
@@ -49,7 +48,7 @@ namespace EcobitStage.ViewModel
         private void Initialize()
         {
             SelectedUser = null;
-            ObservableUsers = new ObservableCollection<DataViewModel.User>();
+            ObservableUsers = new ObservableCollection<User>();
             RefreshCommand = new RelayCommand(Refresh);
             DeleteCommand = new RelayCommand(Delete);
             //SearchCommand = new RelayCommand(Search);
@@ -58,7 +57,7 @@ namespace EcobitStage.ViewModel
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
         }
-            private void Save()
+        private void Save()
         {
             if (ConnectionCheck.Online)
             {
@@ -85,7 +84,6 @@ namespace EcobitStage.ViewModel
         {
             if (ConnectionCheck.Online)
             {
-                
                 ObservableUsers.Remove(SelectedUser);
                 SelectedUser = null;
             }
@@ -101,8 +99,8 @@ namespace EcobitStage.ViewModel
             ObservableUsers.Clear();
             using (var context = new EcobitDBEntities())
             {
-                List<Ecobit.Domain.User> list = new List<Ecobit.Domain.User>(context.User.ToList());
-                foreach (Ecobit.Domain.User u in list)
+                List<User> list = new List<User>(context.User.ToList());
+                foreach (User u in list)
                 {
                     _users.Add(u);
                     ObservableUsers.Add(u);
