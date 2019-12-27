@@ -1,5 +1,4 @@
-﻿
-using EcobitStage.Offline;
+﻿using EcobitStage.Offline;
 using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -43,37 +42,28 @@ namespace EcobitStage.ViewModel
         public UserViewModel()
         {
             Initialize();
-            Refresh();
         }
         private void Initialize()
         {
             SelectedUser = null;
             ObservableUsers = new ObservableCollection<User>();
-            RefreshCommand = new RelayCommand(Refresh);
             DeleteCommand = new RelayCommand(Delete);
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
-            //NewCommand = new RelayCommand(New);
-            SaveCommand = new RelayCommand(Save);
+            NewCommand = new RelayCommand(New);
+            //SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
         }
-        private void Save()
-        {
-            if (ConnectionCheck.Online)
-            {
-                if (SelectedUser.Validate())
-                {
-                    var list = new List<UserDTO>();
-                    list.Add((UserDTO)SelectedUser.ConvertToDTO());
-                    Refresh();
-                    Cancel();
-                }
-            }
-            else
-            {
-                MessageBox.Show(ConnectionCheck.errorMsg);
-            }
 
+        private void New()
+        {
+            SelectedUser = new User(-1);
+            Edit();
+        }
+
+        private void Edit()
+        {
+            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserEditView();
         }
         private void Cancel()
         {
@@ -90,21 +80,6 @@ namespace EcobitStage.ViewModel
             else
             {
                 System.Windows.MessageBox.Show(ConnectionCheck.errorMsg);
-            }
-        }
-
-        private void Refresh()
-        {
-            _users.Clear();
-            ObservableUsers.Clear();
-            using (var context = new EcobitDBEntities())
-            {
-                List<User> list = new List<User>(context.User.ToList());
-                foreach (User u in list)
-                {
-                    _users.Add(u);
-                    ObservableUsers.Add(u);
-                }
             }
         }
     }

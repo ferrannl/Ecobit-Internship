@@ -127,6 +127,9 @@
     <Compile Include="View\UserPrivilegeListView.xaml.cs">
       <DependentUpon>UserPrivilegeListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserEditView.xaml.cs">
+      <DependentUpon>UserEditView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +154,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UserEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -215,6 +222,9 @@
     <Resource Include="View\Repo\times.jpg" />
     <Resource Include="View\Repo\User.png" />
     <Resource Include="View\Repo\UserPrivilege.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Repo\green_plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

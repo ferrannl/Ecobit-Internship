@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="EcobitStage.View.UserEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:EcobitStage.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="UserView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding UserList, Source={StaticResource Locator}}"
+    mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <Border BorderThickness="10">
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Row="0"
+                        VerticalAlignment="Center"
+                        FontSize="25">
+                        Gebruiker
+                    </TextBlock>
+                </StackPanel>
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel
+                        Grid.Column="0"
+                        HorizontalAlignment="Stretch"
+                        Orientation="Vertical">
+                        <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                            <Label Content="Voornaam:" FontWeight="Bold" />
+                            <TextBox
+                                Height="23"
+                                Margin="10,0"
+                                MaxLength="175"
+                                Text="{Binding SelectedUser.FirstName}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                            <Label Content="Emailadres:" FontWeight="Bold" />
+                            <TextBox
+                                Height="23"
+                                Margin="10,0"
+                                MaxLength="175"
+                                Text="{Binding SelectedUser.Email}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel
+                        Grid.Column="1"
+                        Width="auto"
+                        Orientation="Vertical">
+                        <StackPanel Margin="0,5,0,0" Orientation="Vertical">
+                            <Label Content="Achternaam:" FontWeight="Bold" />
+                            <TextBox
+                                Height="23"
+                                Margin="10,0"
+                                MaxLength="175"
+                                Text="{Binding SelectedUser.LastName}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <Button
+                        MinWidth="100"
+                        Margin="10,15,15,0"
+                        Command="{Binding SaveCommand}"
+                        Content="Opslaan" />
+                    <Button
+                        MinWidth="100"
+                        Margin="10,15,15,0"
+                        Command="{Binding CancelCommand}"
+                        Content="Annuleren" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,0">
+                    <TextBlock Foreground="Red" Text="{Binding SelectedCustomer.UserFeedback, Mode=OneWay}" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</Page>

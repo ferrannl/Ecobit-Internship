@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <Border BorderThickness="10">
         <StackPanel>
-            <Grid>
+            <Grid Width="555" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="600*" />
                     <ColumnDefinition Width="50" />
@@ -23,17 +23,13 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock VerticalAlignment="Center" FontSize="25">Gebruikers</TextBlock>
-                <!--   <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Command="{Binding RefreshCommand}"
-                    Style="{StaticResource Refresh}" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
-                    Command="{Binding NewCommand}"
-                    Style="{StaticResource Plus}" />
-                -->
+                    Background="Transparent"
+                    Command="{Binding NewCommand}">
+                    <Image HorizontalAlignment="Right" Source="/View/Repo/green_plus.png" />
+                </Button>
             </Grid>
             <StackPanel>
                 <DockPanel Margin="0,5">

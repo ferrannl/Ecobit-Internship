@@ -21,9 +21,9 @@ namespace EcobitStage
             _uris["UserPrivilegeView"] = new Uri("UserPrivilegeListView.xaml", UriKind.Relative);
             _uris["AccountView"] = new Uri("AccountView.xaml", UriKind.Relative);
             _uris["LoginView"] = new Uri("LoginView.xaml", UriKind.Relative);
-            _uris["UserView"] = new Uri("UserListView.xaml", UriKind.Relative);
-            _uris["PrivilegeView"] = new Uri("PrivilegeListView.xaml", UriKind.Relative);
-
+            _uris["UserListView"] = new Uri("UserListView.xaml", UriKind.Relative);
+            _uris["PrivilegeListView"] = new Uri("PrivilegeListView.xaml", UriKind.Relative);
+            _uris["UserEditView"] = new Uri("UserEditView.xaml", UriKind.Relative);
         }
 
         public Uri GetUri(string page)
