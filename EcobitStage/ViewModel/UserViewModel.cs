@@ -1,4 +1,5 @@
 ﻿using Ecobit.Domain;
+using EcobitStage.DataTransfer;
 using EcobitStage.Offline;
 using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
@@ -52,7 +53,7 @@ namespace EcobitStage.ViewModel
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
-            //SaveCommand = new RelayCommand(Save);
+            SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
         }
@@ -72,6 +73,22 @@ namespace EcobitStage.ViewModel
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserListView();
         }
 
+        private void Save()
+        {
+            if (SelectedUser.Validate())
+            {
+
+                Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email};
+                using (var context = new EcobitDBEntities())
+                {
+                    context.User.Add(addUser);
+                    context.SaveChanges();
+                }
+                Refresh();
+                Cancel();
+            }
+        }
+
         private void Delete()
         {
             if (ConnectionCheck.Online)
@@ -86,7 +103,6 @@ namespace EcobitStage.ViewModel
         }
         private void Refresh()
         {
-
             _users.Clear();
             ObservableUsers.Clear();
             using (var context = new EcobitDBEntities())
