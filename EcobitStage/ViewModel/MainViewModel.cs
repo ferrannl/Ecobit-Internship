@@ -11,6 +11,9 @@ namespace EcobitStage.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+        //public static string baseUrl = "https://ecobit_iets.azurewebsites.net/";
+
+        public static string baseUrl = "http://localhost:54109/";
 
         #region properties & fields
 

@@ -1,4 +1,5 @@
-﻿using EcobitStage.Offline;
+﻿using Ecobit.Domain;
+using EcobitStage.Offline;
 using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -35,9 +36,9 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
-        public User SelectedUser { get; set; }
-        private List<User> _users = new List<User>();
-        public ObservableCollection<User> ObservableUsers { get; set; }
+        public DataViewModel.User SelectedUser { get; set; }
+        private List<DataViewModel.User> _users = new List<DataViewModel.User>();
+        public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
 
         public UserViewModel()
         {
@@ -46,18 +47,19 @@ namespace EcobitStage.ViewModel
         private void Initialize()
         {
             SelectedUser = null;
-            ObservableUsers = new ObservableCollection<User>();
+            ObservableUsers = new ObservableCollection<DataViewModel.User>();
             DeleteCommand = new RelayCommand(Delete);
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             //SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            Refresh();
         }
 
         private void New()
         {
-            SelectedUser = new User(-1);
+            SelectedUser = new DataViewModel.User(-1);
             Edit();
         }
 
@@ -80,6 +82,22 @@ namespace EcobitStage.ViewModel
             else
             {
                 System.Windows.MessageBox.Show(ConnectionCheck.errorMsg);
+            }
+        }
+        private void Refresh()
+        {
+
+            _users.Clear();
+            ObservableUsers.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.User> list = new List<Ecobit.Domain.User>(context.User.ToList());
+                foreach (Ecobit.Domain.User u in list)
+                {
+                    DataViewModel.User newU = new DataViewModel.User(u.ID, u.FirstName, u.LastName, u.E_mail);
+                    _users.Add(newU);
+                    ObservableUsers.Add(newU);
+                }
             }
         }
     }

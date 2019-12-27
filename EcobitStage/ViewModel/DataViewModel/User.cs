@@ -26,7 +26,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             LastName = DTO.LastName;
             Email = DTO.Email;
         }
-        public User(int ID, string Name, string Contact, string TelephoneNumber, string Email, string Postcode, int HouseNumber, string City)
+        public User(int ID, string FirstName, string LastName, string Email)
         {
             this.ID = ID;
             this.FirstName = FirstName;
