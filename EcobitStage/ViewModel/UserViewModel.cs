@@ -58,13 +58,14 @@ namespace EcobitStage.ViewModel
 
             _users.Clear();
             ObservableUsers.Clear();
-            var list = JsonConvert.DeserializeObject<List<CustomerDTO>>(text);
-
-            foreach (CustomerDTO c in list)
+            using (var context = new EcobitDBEntities())
             {
-                _customers.Add(new Customer(c));
-                ObservableCustomers.Add(new Customer(c));
-
+                List<User> list = new List<User>(context.User.ToList());
+                foreach (User u in list)
+                {
+                    _users.Add(new User(u));
+                    ObservableUsers.Add(new User(u));
+                }
             }
         }
     }
