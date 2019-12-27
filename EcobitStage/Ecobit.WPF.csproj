@@ -101,6 +101,7 @@
     <Compile Include="DataTransfer\AccountDTO.cs" />
     <Compile Include="DataTransfer\PrivilegeDTO.cs" />
     <Compile Include="DataTransfer\UserDTO.cs" />
+    <Compile Include="Offline\ConnectionCheck.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\DataViewModel\ITransfer.cs" />
     <Compile Include="ViewModel\DataViewModel\User.cs" />

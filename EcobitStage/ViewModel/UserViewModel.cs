@@ -1,5 +1,7 @@
 ﻿using Ecobit.Domain;
 using EcobitStage.DataTransfer;
+using EcobitStage.Offline;
+using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -8,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
@@ -33,20 +36,39 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
-        public User SelectedUser { get; set; }
-        private List<User> _users = new List<User>();
-        public ObservableCollection<User> ObservableUsers { get; set; }
+        public DataViewModel.User SelectedUser { get; set; }
+        private List<Ecobit.Domain.User> _users = new List<Ecobit.Domain.User>();
+        public ObservableCollection<Ecobit.Domain.User> ObservableUsers { get; set; }
 
         public UserViewModel()
         {
-            ObservableUsers = new ObservableCollection<User>();
+            ObservableUsers = new ObservableCollection<Ecobit.Domain.User>();
             RefreshCommand = new RelayCommand(Refresh);
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             //NewCommand = new RelayCommand(New);
-            //SaveCommand = new RelayCommand(Save);
+            SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
+        }
+
+        private void Save()
+        {
+            if (ConnectionCheck.Online)
+            {
+                if (SelectedUser.Validate())
+                {
+                    var list = new List<UserDTO>();
+                    list.Add((UserDTO)SelectedUser.ConvertToDTO());
+
+                    Refresh();
+                    Cancel();
+                }
+            }
+            else
+            {
+                MessageBox.Show(ConnectionCheck.errorMsg);
+            }
         }
 
         private void Cancel()
@@ -59,10 +81,10 @@ namespace EcobitStage.ViewModel
             ObservableUsers.Clear();
             using (var context = new EcobitDBEntities())
             {
-                List<User> list = new List<User>(context.User.ToList());
-                foreach (User u in list)
+                List<Ecobit.Domain.User> list = new List<Ecobit.Domain.User>(context.User.ToList());
+                foreach (Ecobit.Domain.User u in list)
                 {
-                      _users.Add(u);
+                    _users.Add(u);
                     ObservableUsers.Add(u);
                 }
             }

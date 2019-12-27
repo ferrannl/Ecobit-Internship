@@ -1,10 +1,10 @@
-﻿using System;
+﻿using EcobitStage.DataTransfer;
+using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EcobitStage.DataTransfer;
-using GalaSoft.MvvmLight;
 
 namespace EcobitStage.ViewModel.DataViewModel
 {
@@ -15,28 +15,35 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string LastName { get; set; }
         private string _email;
         public string Email { get { return _email; } set { _email = value.ToLower(); } }
+        public string UserFeedback { get; set; }
 
-        public User(UserDTO DTO)
-        {
-            ID = DTO.ID;
-            FirstName = DTO.FirstName;
-            LastName = DTO.LastName;
-            Email = DTO.Email;
-        }
-        public User(int ID, string Name, string Contact, string TelephoneNumber, string Email, string Postcode, int HouseNumber, string City)
+        public User(int ID, string FirstName, string LastName, string Email)
         {
             this.ID = ID;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Email = Email;
         }
-        public User(int ID)
+
+        internal bool Validate()
         {
-            this.ID = ID;
+            bool canSave = true;
+            UserFeedback = "";
+
+            if (string.IsNullOrWhiteSpace(FirstName))
+            {
+                UserFeedback += "\r\n Het veld Naam is vereist.";
+                canSave = false;
+            }
+
+            RaisePropertyChanged(() => UserFeedback);
+            return canSave;
         }
-            public DTO ConvertToDTO()
+
+        public DTO ConvertToDTO()
         {
-            return new UserDTO(ID, FirstName, LastName, Email);
+            throw new NotImplementedException();
         }
+
     }
 }
