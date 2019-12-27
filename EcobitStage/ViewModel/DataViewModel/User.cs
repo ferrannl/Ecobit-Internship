@@ -16,7 +16,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         private string _email;
         public string Email { get { return _email; } set { _email = value.ToLower(); } }
 
-
         public User(UserDTO DTO)
         {
             ID = DTO.ID;
@@ -30,6 +29,10 @@ namespace EcobitStage.ViewModel.DataViewModel
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Email = Email;
+        }
+        public User(int ID)
+        {
+            this.ID = ID;
         }
             public DTO ConvertToDTO()
         {

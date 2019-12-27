@@ -8,9 +8,6 @@ namespace EcobitStage.DataTransfer
 {
     public class UserDTO : DTO
     {
-        public UserDTO()
-        {
-        }
         public UserDTO(int ID, string FirstName, string LastName, string Email)
         {
             this.ID = ID;

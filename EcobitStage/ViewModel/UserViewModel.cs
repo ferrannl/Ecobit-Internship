@@ -1,4 +1,5 @@
 ﻿using Ecobit.Domain;
+using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -33,7 +34,6 @@ namespace EcobitStage.ViewModel
             }
         }
         public User SelectedUser { get; set; }
-
         private List<User> _users = new List<User>();
         public ObservableCollection<User> ObservableUsers { get; set; }
 
@@ -41,10 +41,10 @@ namespace EcobitStage.ViewModel
         {
             ObservableUsers = new ObservableCollection<User>();
             RefreshCommand = new RelayCommand(Refresh);
-            SearchCommand = new RelayCommand(Search);
-            EditCommand = new RelayCommand(Edit);
-            NewCommand = new RelayCommand(New);
-            SaveCommand = new RelayCommand(Save);
+            //SearchCommand = new RelayCommand(Search);
+            //EditCommand = new RelayCommand(Edit);
+            //NewCommand = new RelayCommand(New);
+            //SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
         }
@@ -55,7 +55,6 @@ namespace EcobitStage.ViewModel
         }
         private void Refresh()
         {
-
             _users.Clear();
             ObservableUsers.Clear();
             using (var context = new EcobitDBEntities())
@@ -63,8 +62,8 @@ namespace EcobitStage.ViewModel
                 List<User> list = new List<User>(context.User.ToList());
                 foreach (User u in list)
                 {
-                    _users.Add(new User(u));
-                    ObservableUsers.Add(new User(u));
+                      _users.Add(u);
+                    ObservableUsers.Add(u);
                 }
             }
         }
