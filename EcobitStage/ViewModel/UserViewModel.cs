@@ -18,6 +18,7 @@ namespace EcobitStage.ViewModel
     public class UserViewModel : ViewModelBase
     {
         public ICommand RefreshCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand NewCommand { get; set; }
@@ -38,21 +39,26 @@ namespace EcobitStage.ViewModel
         }
         public DataViewModel.User SelectedUser { get; set; }
         private List<Ecobit.Domain.User> _users = new List<Ecobit.Domain.User>();
-        public ObservableCollection<Ecobit.Domain.User> ObservableUsers { get; set; }
+        public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
 
         public UserViewModel()
         {
-            ObservableUsers = new ObservableCollection<Ecobit.Domain.User>();
+            Initialize();
+            Refresh();
+        }
+        private void Initialize()
+        {
+            SelectedUser = null;
+            ObservableUsers = new ObservableCollection<DataViewModel.User>();
             RefreshCommand = new RelayCommand(Refresh);
+            DeleteCommand = new RelayCommand(Delete);
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             //NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
-            Refresh();
         }
-
-        private void Save()
+            private void Save()
         {
             if (ConnectionCheck.Online)
             {
@@ -60,7 +66,6 @@ namespace EcobitStage.ViewModel
                 {
                     var list = new List<UserDTO>();
                     list.Add((UserDTO)SelectedUser.ConvertToDTO());
-
                     Refresh();
                     Cancel();
                 }
@@ -69,12 +74,27 @@ namespace EcobitStage.ViewModel
             {
                 MessageBox.Show(ConnectionCheck.errorMsg);
             }
-        }
 
+        }
         private void Cancel()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserListView();
         }
+
+        private void Delete()
+        {
+            if (ConnectionCheck.Online)
+            {
+                
+                ObservableUsers.Remove(SelectedUser);
+                SelectedUser = null;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(ConnectionCheck.errorMsg);
+            }
+        }
+
         private void Refresh()
         {
             _users.Clear();

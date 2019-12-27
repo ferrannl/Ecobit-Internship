@@ -42,7 +42,7 @@ namespace EcobitStage.ViewModel.DataViewModel
 
         public DTO ConvertToDTO()
         {
-            throw new NotImplementedException();
+            return new UserDTO(ID, FirstName, LastName, Email);
         }
 
     }
