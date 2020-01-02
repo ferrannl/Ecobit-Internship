@@ -91,15 +91,14 @@ namespace EcobitStage.ViewModel
 
         private void Delete()
         {
-            if (ConnectionCheck.Online)
+            using (var context = new EcobitDBEntities())
             {
-                ObservableUsers.Remove(SelectedUser);
+                var user = context.User.Where(u => u.ID == SelectedUser.ID).FirstOrDefault();
+                context.User.Remove(user);
+                context.SaveChanges();
+            }
+            ObservableUsers.Remove(SelectedUser);
                 SelectedUser = null;
-            }
-            else
-            {
-                System.Windows.MessageBox.Show(ConnectionCheck.errorMsg);
-            }
         }
         private void Refresh()
         {
