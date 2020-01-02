@@ -104,6 +104,7 @@
     <Compile Include="Offline\ConnectionCheck.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\DataViewModel\ITransfer.cs" />
+    <Compile Include="ViewModel\DataViewModel\Privilege.cs" />
     <Compile Include="ViewModel\DataViewModel\User.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -120,6 +121,9 @@
     </Compile>
     <Compile Include="View\PrivilegeListView.xaml.cs">
       <DependentUpon>PrivilegeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PrivilegeEditView.xaml.cs">
+      <DependentUpon>PrivilegeEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
@@ -141,6 +145,10 @@
     <Page Include="View\PrivilegeListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PrivilegeEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\UserListView.xaml">
       <SubType>Designer</SubType>

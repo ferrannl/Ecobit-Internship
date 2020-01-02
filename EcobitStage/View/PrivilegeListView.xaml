@@ -22,17 +22,24 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock VerticalAlignment="Center" FontSize="25">Toegankelijkheden</TextBlock>
-                <!--   <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Command="{Binding RefreshCommand}"
-                    Style="{StaticResource Refresh}" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
-                    Command="{Binding NewCommand}"
-                    Style="{StaticResource Plus}" />
-                -->
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding NewCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Image HorizontalAlignment="Right" Source="/View/Repo/green_plus.png" />
+                </Button>
             </Grid>
             <StackPanel>
                 <DockPanel Margin="0,5">

@@ -73,8 +73,7 @@ namespace EcobitStage.ViewModel
         {
             CurrentPage = factory.GetUri("UserView");
         }
-
-
+        
         public void OpenPrivilegeListView()
         {
             CurrentPage = factory.GetUri("PrivilegeListView");
@@ -84,6 +83,11 @@ namespace EcobitStage.ViewModel
         {
             CurrentPage = factory.GetUri("UserEditView");
         }
+        public void OpenPrivilegeEditView()
+        {
+            CurrentPage = factory.GetUri("PrivilegeEditView");
+        }
+        
 
         private void OpenLogout()
         {

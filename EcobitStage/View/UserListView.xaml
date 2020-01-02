@@ -7,7 +7,6 @@
     Title="UserListView"
     MinWidth="575"
     MinHeight="280"
-    Background="White"
     DataContext="{Binding UserList, Source={StaticResource Locator}}"
     mc:Ignorable="d">
     <Border BorderThickness="10">
@@ -89,14 +88,30 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                    <Button
+                                        Width="26"
+                                        Height="26"
+                                        Background="Orange"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        Content="✏️"
+                                        FontSize="15"
+                                        Foreground="White" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                    <Button
+                                        Width="26"
+                                        Height="26"
+                                        Background="Crimson"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        Content="❌"
+                                        FontSize="15"
+                                        Foreground="White" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

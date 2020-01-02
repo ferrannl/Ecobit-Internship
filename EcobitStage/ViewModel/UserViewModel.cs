@@ -40,7 +40,6 @@ namespace EcobitStage.ViewModel
         public DataViewModel.User SelectedUser { get; set; }
         private List<DataViewModel.User> _users = new List<DataViewModel.User>();
         public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
-
         public UserViewModel()
         {
             Initialize();
@@ -77,7 +76,7 @@ namespace EcobitStage.ViewModel
         {
             if (SelectedUser.Validate())
             {
-                Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email};
+                Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email };
                 using (var context = new EcobitDBEntities())
                 {
                     context.User.Add(addUser);
@@ -90,14 +89,23 @@ namespace EcobitStage.ViewModel
 
         private void Delete()
         {
-            using (var context = new EcobitDBEntities())
+            if (MessageBox.Show("Wil je deze gebruiker verwijderen?",
+            "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                var user = context.User.Where(u => u.ID == SelectedUser.ID).FirstOrDefault();
-                context.User.Remove(user);
-                context.SaveChanges();
-            }
-            ObservableUsers.Remove(SelectedUser);
+                using (var context = new EcobitDBEntities())
+                {
+                    var user = context.User.Where(u => u.ID == SelectedUser.ID).FirstOrDefault();
+                    context.User.Remove(user);
+                    context.SaveChanges();
+                }
+                ObservableUsers.Remove(SelectedUser);
                 SelectedUser = null;
+            }
+            else
+            {
+                // Do not close the window  
+            }
+
         }
         private void Refresh()
         {
