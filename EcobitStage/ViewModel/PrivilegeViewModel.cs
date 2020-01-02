@@ -1,13 +1,9 @@
 ﻿using Ecobit.Domain;
-using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -22,6 +18,7 @@ namespace EcobitStage.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         private string _searchQuery;
+
         public string SearchQuery
         {
             get
@@ -34,13 +31,16 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
+
         public DataViewModel.Privilege SelectedPrivilege { get; set; }
         private List<DataViewModel.Privilege> _privileges = new List<DataViewModel.Privilege>();
         public ObservableCollection<DataViewModel.Privilege> ObservablePrivileges { get; set; }
+
         public PrivilegeViewModel()
         {
             Initialize();
         }
+
         private void Initialize()
         {
             SelectedPrivilege = null;
@@ -56,7 +56,7 @@ namespace EcobitStage.ViewModel
 
         private void New()
         {
-            SelectedPrivilege = new DataViewModel.Privilege("");
+            SelectedPrivilege = new DataViewModel.Privilege();
             Edit();
         }
 
@@ -64,6 +64,7 @@ namespace EcobitStage.ViewModel
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenPrivilegeEditView();
         }
+
         private void Cancel()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenPrivilegeListView();
@@ -71,10 +72,21 @@ namespace EcobitStage.ViewModel
 
         private void Save()
         {
-            if (SelectedPrivilege.Validate())
+            bool saved = true;
+            Ecobit.Domain.Privilege addPrivilege = new Ecobit.Domain.Privilege { Name = SelectedPrivilege.Name };
+            using (var context = new EcobitDBEntities())
             {
-                Ecobit.Domain.Privilege addPrivilege = new Ecobit.Domain.Privilege { Name = SelectedPrivilege.Name };
-                using (var context = new EcobitDBEntities())
+                List<Ecobit.Domain.Privilege> list = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
+                foreach (Ecobit.Domain.Privilege p in list)
+                {
+                    if (p.Name == SelectedPrivilege.Name)
+                    {
+                        MessageBox.Show("Bestaat al",
+                            "bestaat al", MessageBoxButton.OK);
+                        saved = false;
+                    }
+                }
+                if (saved == true)
                 {
                     context.Privilege.Add(addPrivilege);
                     context.SaveChanges();
@@ -100,10 +112,10 @@ namespace EcobitStage.ViewModel
             }
             else
             {
-                // Do not close the window  
+                // Do not close the window
             }
-
         }
+
         private void Refresh()
         {
             _privileges.Clear();

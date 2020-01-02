@@ -1,15 +1,9 @@
 ﻿using Ecobit.Domain;
-using EcobitStage.DataTransfer;
-using EcobitStage.Offline;
-using EcobitStage.ViewModel.DataViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,6 +19,7 @@ namespace EcobitStage.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         private string _searchQuery;
+
         public string SearchQuery
         {
             get
@@ -37,13 +32,16 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
+
         public DataViewModel.User SelectedUser { get; set; }
         private List<DataViewModel.User> _users = new List<DataViewModel.User>();
         public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
+
         public UserViewModel()
         {
             Initialize();
         }
+
         private void Initialize()
         {
             SelectedUser = null;
@@ -67,6 +65,7 @@ namespace EcobitStage.ViewModel
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserEditView();
         }
+
         private void Cancel()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserListView();
@@ -103,10 +102,10 @@ namespace EcobitStage.ViewModel
             }
             else
             {
-                // Do not close the window  
+                // Do not close the window
             }
-
         }
+
         private void Refresh()
         {
             _users.Clear();

@@ -20,7 +20,7 @@
                         Grid.Row="0"
                         VerticalAlignment="Center"
                         FontSize="25">
-                        Gebruiker
+                        Toegankelijkheden
                     </TextBlock>
                 </StackPanel>
 
@@ -35,12 +35,12 @@
                         HorizontalAlignment="Stretch"
                         Orientation="Vertical">
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
-                            <Label Content="Voornaam:" FontWeight="Bold" />
+                            <Label Content="Naam:" FontWeight="Bold" />
                             <TextBox
                                 Height="23"
                                 Margin="10,0"
-                                MaxLength="175"
-                                Text="{Binding Privilege.Name}" />
+                                MaxLength="80"
+                                Text="{Binding SelectedPrivilege.Name}" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -59,7 +59,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,0">
-                    <TextBlock Foreground="Red" Text="{Binding SelectedCustomer.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedPrivilege.UserFeedback, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </Border>
