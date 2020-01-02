@@ -84,7 +84,7 @@
                             Header="Achternaam" />
                         <DataGridTextColumn
                             Width="100*"
-                            Binding="{Binding EMail}"
+                            Binding="{Binding Email}"
                             Header="E-mail" />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>

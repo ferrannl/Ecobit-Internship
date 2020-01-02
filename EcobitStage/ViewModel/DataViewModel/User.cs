@@ -14,8 +14,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        private string _email;
-        public string Email { get { return _email; } set { _email = value.ToLower(); } }
+        public string Email { get; set; }
         public string UserFeedback { get; set; }
 
 

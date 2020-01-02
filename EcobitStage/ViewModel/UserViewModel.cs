@@ -77,7 +77,6 @@ namespace EcobitStage.ViewModel
         {
             if (SelectedUser.Validate())
             {
-
                 Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email};
                 using (var context = new EcobitDBEntities())
                 {
