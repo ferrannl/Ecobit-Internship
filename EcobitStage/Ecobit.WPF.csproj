@@ -127,6 +127,9 @@
     <Compile Include="View\PrivilegeEditView.xaml.cs">
       <DependentUpon>PrivilegeEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserPrivilegeEditView.xaml.cs">
+      <DependentUpon>UserPrivilegeEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserListView.xaml.cs">
       <DependentUpon>UserListView.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PrivilegeEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserPrivilegeEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

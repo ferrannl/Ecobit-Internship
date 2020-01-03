@@ -38,10 +38,9 @@ namespace EcobitStage.ViewModel.DataViewModel
             this._StartDate = ConvertDate(StartDate);
             this._EndDate = ConvertDate(EndDate);
         }
-        public UserPrivilege(int User_ID, string Privilege_Name)
+        public UserPrivilege()
         {
-            this.User_ID = User_ID;
-            this.Privilege_Name = Privilege_Name;
+
         }
 
         internal bool Validate()

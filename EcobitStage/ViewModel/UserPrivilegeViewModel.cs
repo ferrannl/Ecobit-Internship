@@ -34,8 +34,13 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        public DataViewModel.UserPrivilege SelectedUserPrivilege { get; set; }
+        private List<DataViewModel.User> _users = new List<DataViewModel.User>();
+        private List<DataViewModel.Privilege> _privileges = new List<DataViewModel.Privilege>();
         private List<DataViewModel.UserPrivilege> _userprivileges = new List<DataViewModel.UserPrivilege>();
+
+        public DataViewModel.UserPrivilege SelectedUserPrivilege { get; set; }
+        public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
+        public ObservableCollection<DataViewModel.Privilege> ObservablePrivileges { get; set; }
         public ObservableCollection<DataViewModel.UserPrivilege> ObservableUserPrivileges { get; set; }
 
         public UserPrivilegeViewModel()
@@ -46,7 +51,10 @@ namespace EcobitStage.ViewModel
         private void Initialize()
         {
             SelectedUserPrivilege = null;
+            ObservableUsers = new ObservableCollection<DataViewModel.User>();
+            ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
+
             DeleteCommand = new RelayCommand(Delete);
             //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
@@ -58,13 +66,13 @@ namespace EcobitStage.ViewModel
 
         private void New()
         {
-            SelectedUserPrivilege = new DataViewModel.UserPrivilege(2, "Outlook");
+            SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             Edit();
         }
 
         private void Edit()
         {
-            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserEditView();
+            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
         }
 
         private void Cancel()
@@ -141,6 +149,40 @@ namespace EcobitStage.ViewModel
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
                     _userprivileges.Add(newUP);
                     ObservableUserPrivileges.Add(newUP);
+                }
+            }
+            RefreshPrivileges();
+            RefreshUsers();
+        }
+        private void RefreshPrivileges()
+
+        {
+            _privileges.Clear();
+            ObservablePrivileges.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.Privilege> list = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
+                foreach (Ecobit.Domain.Privilege p in list)
+                {
+                    DataViewModel.Privilege newP = new DataViewModel.Privilege(p.Name);
+                    _privileges.Add(newP);
+                    ObservablePrivileges.Add(newP);
+                }
+            }
+        }
+
+        private void RefreshUsers()
+        {
+            _users.Clear();
+            ObservableUsers.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.User> list = new List<Ecobit.Domain.User>(context.User.ToList());
+                foreach (Ecobit.Domain.User u in list)
+                {
+                    DataViewModel.User newU = new DataViewModel.User(u.ID, u.FirstName, u.LastName, u.E_mail);
+                    _users.Add(newU);
+                    ObservableUsers.Add(newU);
                 }
             }
         }
