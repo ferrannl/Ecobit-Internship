@@ -5,20 +5,121 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EcobitStage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="UserPrivilege"
-    Width="800"
-    Height="450"
+    Title="UserPrivilegeList"
+    MinWidth="575"
+    MinHeight="280"
     DataContext="{Binding UserPrivilegeList, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    <StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-            </Grid.ColumnDefinitions>
-            <TextBlock>Gebruikers:</TextBlock>
-            <Button HorizontalAlignment="Right">Log uit</Button>
-        </Grid>
-        <DataGrid IsReadOnly="True" ItemsSource="{Binding UserPrivileges}" />
-    </StackPanel>
+    <Border BorderThickness="10">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <TextBlock VerticalAlignment="Center" FontSize="25">Gebruikers Toegankelijkheden</TextBlock>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding NewCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Image HorizontalAlignment="Right" Source="/View/Repo/green_plus.png" />
+                </Button>
+            </Grid>
+            <StackPanel>
+                <DockPanel Margin="0,5">
+                    <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
+                            <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <Button
+                        Width="50"
+                        Margin="5,0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding SearchCommand}"
+                        Content="Zoek" />
+                </DockPanel>
+                <DataGrid
+                    Height="300"
+                    AutoGenerateColumns="False"
+                    Background="White"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ObservableUserPrivileges}"
+                    SelectedItem="{Binding SelectedUserPrivilege}"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="120*"
+                            Binding="{Binding User_ID}"
+                            Header="Gebruiker" />
+                        <DataGridTextColumn
+                            Width="120*"
+                            Binding="{Binding Privilege_Name}"
+                            Header="Naam" />
+                        <DataGridTextColumn
+                            Width="120*"
+                            Binding="{Binding _StartDate}"
+                            Header="Start Datum" />
+                        <DataGridTextColumn
+                            Width="120*"
+                            Binding="{Binding _EndDate}"
+                            Header="Eind Datum" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Width="26"
+                                        Height="26"
+                                        HorizontalAlignment="Right"
+                                        Background="Orange"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        Content="✏️"
+                                        FontSize="15"
+                                        Foreground="White" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Width="26"
+                                        Height="26"
+                                        Background="Crimson"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        Content="❌"
+                                        FontSize="15"
+                                        Foreground="White" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Border>
 </Page>

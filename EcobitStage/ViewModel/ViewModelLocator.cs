@@ -33,14 +33,6 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        public UserPrivilegeViewModel UserPrivilege
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<UserPrivilegeViewModel>();
-            }
-        }
-
         public UserPrivilegeViewModel UserPrivilegeList
         {
             get
