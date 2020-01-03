@@ -34,10 +34,10 @@
 warning 6002: The table/view 'EcobitStageDB.dbo.UserPrivilege' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserPrivilege">
           <Key>
-            <PropertyRef Name="User_ID" />
             <PropertyRef Name="Privilege_Name" />
             <PropertyRef Name="StartDate" />
             <PropertyRef Name="EndDate" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Privilege_Name" Type="varchar" MaxLength="50" Nullable="false" />
@@ -72,13 +72,7 @@ warning 6002: The table/view 'EcobitStageDB.dbo.UserPrivilege' does not have a p
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Privilege" EntityType="Self.Privilege" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserPrivilege" EntityType="Self.UserPrivilege" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserPrivilege].[User_ID] AS [User_ID], 
-    [UserPrivilege].[Privilege_Name] AS [Privilege_Name], 
-    [UserPrivilege].[StartDate] AS [StartDate], 
-    [UserPrivilege].[EndDate] AS [EndDate]
-    FROM [dbo].[UserPrivilege] AS [UserPrivilege]</DefiningQuery>
+          <EntitySet Name="UserPrivilege" EntityType="Self.UserPrivilege" store:Type="Tables" Schema="dbo">
           </EntitySet>
           <AssociationSet Name="FK_UserPrivilege_Privilege" Association="Self.FK_UserPrivilege_Privilege">
             <End Role="Privilege" EntitySet="Privilege" />
@@ -122,10 +116,10 @@ warning 6002: The table/view 'EcobitStageDB.dbo.UserPrivilege' does not have a p
         </EntityType>
         <EntityType Name="UserPrivilege">
           <Key>
-            <PropertyRef Name="User_ID" />
             <PropertyRef Name="Privilege_Name" />
             <PropertyRef Name="StartDate" />
             <PropertyRef Name="EndDate" />
+            <PropertyRef Name="User_ID" />
           </Key>
           <Property Name="User_ID" Type="Int32" Nullable="false" />
           <Property Name="Privilege_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
