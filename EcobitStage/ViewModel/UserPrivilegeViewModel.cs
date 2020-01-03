@@ -1,4 +1,5 @@
 ﻿using Ecobit.Domain;
+using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
@@ -106,6 +107,27 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        public string GetFullnameByID(int id)
+        {
+            string fullname = null;
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+
+                var user = context.User.FirstOrDefault(i => i.ID == id);
+                fullname = user.FirstName + " " + user.LastName;
+
+            }
+            if (fullname != null)
+            {
+                return fullname;
+            }
+            else
+            {
+                return "geen_naam";
+            }
+        }
+
         private void Refresh()
         {
             _userprivileges.Clear();
@@ -116,6 +138,7 @@ namespace EcobitStage.ViewModel
                 foreach (Ecobit.Domain.UserPrivilege up in list)
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
+                    newUP.Fullname = GetFullnameByID(newUP.User_ID);
                     _userprivileges.Add(newUP);
                     ObservableUserPrivileges.Add(newUP);
                 }

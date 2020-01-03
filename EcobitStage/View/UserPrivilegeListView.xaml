@@ -72,7 +72,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="120*"
-                            Binding="{Binding User_ID}"
+                            Binding="{Binding Fullname}"
                             Header="Gebruiker" />
                         <DataGridTextColumn
                             Width="120*"

@@ -21,6 +21,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string Year { get; set; }
         public string Month { get; set; }
         public string Day { get; set; }
+        public string Fullname { get; set; }
 
 
         public UserPrivilege(UserPrivilegeDTO DTO)
