@@ -81,8 +81,8 @@ namespace EcobitStage.ViewModel
                 {
                     if (p.Name == SelectedPrivilege.Name)
                     {
-                        MessageBox.Show("Bestaat al",
-                            "bestaat al", MessageBoxButton.OK);
+                        MessageBox.Show(SelectedPrivilege.Name + " bestaat al.",
+                            "Bestaat al", MessageBoxButton.OK);
                         saved = false;
                     }
                 }
@@ -98,7 +98,7 @@ namespace EcobitStage.ViewModel
 
         private void Delete()
         {
-            if (MessageBox.Show("Wil je deze privilege verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedPrivilege + " verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())
