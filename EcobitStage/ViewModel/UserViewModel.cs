@@ -47,12 +47,22 @@ namespace EcobitStage.ViewModel
             SelectedUser = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             DeleteCommand = new RelayCommand(Delete);
-            //SearchCommand = new RelayCommand(Search);
+            SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
+        }
+
+        private void Search()
+        {
+            var query = SearchQuery.ToLower();
+            ObservableUsers.Clear();
+            foreach (User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.ID.ToString() == query || cust.Contact.ToLower().Contains(query)))
+            {
+                ObservableCustomers.Add(c);
+            }
         }
 
         private void New()
