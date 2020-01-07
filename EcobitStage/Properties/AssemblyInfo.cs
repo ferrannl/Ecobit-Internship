@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("EcobitStage")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Made by: Ferran Hendriks")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
 [assembly: AssemblyProduct("EcobitStage")]
