@@ -42,8 +42,8 @@
                                 Height="23"
                                 Margin="10,0"
                                 DisplayMemberPath="FirstName"
-                                ItemsSource="{Binding Users}"
-                                SelectedItem="{Binding SelectedUserPrivilege.Fullname}"
+                                ItemsSource="{Binding ObservableUsers}"
+                                SelectedItem="{Binding SelectedUser}"
                                 SelectedValuePath="FirstName" />
                         </StackPanel>
 
@@ -73,10 +73,10 @@
                             <ComboBox
                                 Height="23"
                                 Margin="10,0"
-                                DisplayMemberPath="Privilege"
-                                ItemsSource="{Binding Privileges}"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding ObservablePrivileges}"
                                 SelectedItem="{Binding SelectedUserPrivilege.Privilege_Name}"
-                                SelectedValuePath="Privilege" />
+                                SelectedValuePath="Name" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
@@ -108,9 +108,6 @@
                         Content="Annuleren" />
                 </StackPanel>
 
-                <StackPanel Margin="0,0,0,0">
-                    <TextBlock Foreground="Red" Text="{Binding SelectedUserPrivilege.UserFeedback, Mode=OneWay}" />
-                </StackPanel>
             </StackPanel>
         </Border>
     </ScrollViewer>

@@ -39,6 +39,8 @@ namespace EcobitStage.ViewModel
         private List<DataViewModel.UserPrivilege> _userprivileges = new List<DataViewModel.UserPrivilege>();
 
         public DataViewModel.UserPrivilege SelectedUserPrivilege { get; set; }
+        public DataViewModel.User SelectedUser { get; set; }
+
         public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
         public ObservableCollection<DataViewModel.Privilege> ObservablePrivileges { get; set; }
         public ObservableCollection<DataViewModel.UserPrivilege> ObservableUserPrivileges { get; set; }
@@ -51,6 +53,7 @@ namespace EcobitStage.ViewModel
         private void Initialize()
         {
             SelectedUserPrivilege = null;
+            SelectedUser = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
@@ -67,6 +70,7 @@ namespace EcobitStage.ViewModel
         private void New()
         {
             SelectedUserPrivilege = new DataViewModel.UserPrivilege();
+            SelectedUser = new DataViewModel.User(-1);
             Edit();
         }
 
@@ -84,9 +88,9 @@ namespace EcobitStage.ViewModel
         {
             if (SelectedUserPrivilege.Validate())
             {
-                Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUserPrivilege.User_ID, Privilege_Name = SelectedUserPrivilege.Privilege_Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())
                 {
+                Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedUserPrivilege.Privilege_Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                     context.UserPrivilege.Add(addUserPrivilege);
                     context.SaveChanges();
                 }

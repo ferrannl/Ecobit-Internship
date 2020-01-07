@@ -117,9 +117,9 @@ warning 6002: The table/view 'EcobitStageDB.dbo.UserPrivilege' does not have a p
         <EntityType Name="UserPrivilege">
           <Key>
             <PropertyRef Name="Privilege_Name" />
-            <PropertyRef Name="StartDate" />
             <PropertyRef Name="EndDate" />
             <PropertyRef Name="User_ID" />
+            <PropertyRef Name="StartDate" />
           </Key>
           <Property Name="User_ID" Type="Int32" Nullable="false" />
           <Property Name="Privilege_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
