@@ -82,7 +82,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,0">
-                    <TextBlock Foreground="Red" Text="{Binding SelectedCustomer.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedUser.UserFeedback, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </Border>

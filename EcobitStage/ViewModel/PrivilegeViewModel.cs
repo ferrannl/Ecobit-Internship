@@ -72,27 +72,30 @@ namespace EcobitStage.ViewModel
 
         private void Save()
         {
-            bool saved = true;
-            Ecobit.Domain.Privilege addPrivilege = new Ecobit.Domain.Privilege { Name = SelectedPrivilege.Name };
-            using (var context = new EcobitDBEntities())
+            if (SelectedPrivilege.Validate())
             {
-                List<Ecobit.Domain.Privilege> list = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
-                foreach (Ecobit.Domain.Privilege p in list)
+                bool saved = true;
+                Ecobit.Domain.Privilege addPrivilege = new Ecobit.Domain.Privilege { Name = SelectedPrivilege.Name };
+                using (var context = new EcobitDBEntities())
                 {
-                    if (p.Name.ToLower() == SelectedPrivilege.Name.ToLower())
+                    List<Ecobit.Domain.Privilege> list = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
+                    foreach (Ecobit.Domain.Privilege p in list)
                     {
-                        MessageBox.Show(SelectedPrivilege.Name + " bestaat al.",
-                            "Bestaat al", MessageBoxButton.OK);
-                        saved = false;
+                        if (p.Name.ToLower() == SelectedPrivilege.Name.ToLower())
+                        {
+                            MessageBox.Show(SelectedPrivilege.Name + " bestaat al.",
+                                "Bestaat al", MessageBoxButton.OK);
+                            saved = false;
+                        }
                     }
+                    if (saved == true)
+                    {
+                        context.Privilege.Add(addPrivilege);
+                        context.SaveChanges();
+                    }
+                    Refresh();
+                    Cancel();
                 }
-                if (saved == true)
-                {
-                    context.Privilege.Add(addPrivilege);
-                    context.SaveChanges();
-                }
-                Refresh();
-                Cancel();
             }
         }
 

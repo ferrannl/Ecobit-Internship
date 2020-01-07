@@ -38,8 +38,9 @@ namespace EcobitStage.ViewModel
         private List<DataViewModel.Privilege> _privileges = new List<DataViewModel.Privilege>();
         private List<DataViewModel.UserPrivilege> _userprivileges = new List<DataViewModel.UserPrivilege>();
 
-        public DataViewModel.UserPrivilege SelectedUserPrivilege { get; set; }
         public DataViewModel.User SelectedUser { get; set; }
+        public DataViewModel.Privilege SelectedPrivilege { get; set; }
+        public DataViewModel.UserPrivilege SelectedUserPrivilege { get; set; }
 
         public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
         public ObservableCollection<DataViewModel.Privilege> ObservablePrivileges { get; set; }
@@ -52,8 +53,9 @@ namespace EcobitStage.ViewModel
 
         private void Initialize()
         {
-            SelectedUserPrivilege = null;
             SelectedUser = null;
+            SelectedPrivilege = null;
+            SelectedUserPrivilege = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
@@ -69,30 +71,48 @@ namespace EcobitStage.ViewModel
 
         private void New()
         {
-            SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             SelectedUser = new DataViewModel.User(-1);
+            SelectedPrivilege = new DataViewModel.Privilege();
+            SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             Edit();
         }
 
         private void Edit()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
+            Refresh();
         }
 
         private void Cancel()
         {
-            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserListView();
+            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeListView();
         }
 
         private void Save()
         {
-            if (SelectedUserPrivilege.Validate())
+            bool saved = true;
+            //Validation
+            if (true)
             {
+                Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedPrivilege.Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())
                 {
-                Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedUserPrivilege.Privilege_Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
-                    context.UserPrivilege.Add(addUserPrivilege);
-                    context.SaveChanges();
+                    List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+
+                    foreach (Ecobit.Domain.UserPrivilege up in list)
+                    {
+                        if (up.Privilege_Name.ToLower() == SelectedPrivilege.Name.ToLower() && up.User_ID == SelectedUser.ID)
+                        {
+                            MessageBox.Show("Combinatie " + SelectedUser.FirstName + " - " + SelectedPrivilege.Name + " bestaat al.",
+                                "Combinatie bestaat al", MessageBoxButton.OK);
+                            saved = false;
+                        }
+                    }
+                    if (saved == true)
+                    {
+                        context.UserPrivilege.Add(addUserPrivilege);
+                        context.SaveChanges();
+                    }
                 }
                 Refresh();
                 Cancel();

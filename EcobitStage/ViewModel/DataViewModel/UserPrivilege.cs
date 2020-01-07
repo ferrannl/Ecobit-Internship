@@ -35,8 +35,22 @@ namespace EcobitStage.ViewModel.DataViewModel
         {
             this.User_ID = User_ID;
             this.Privilege_Name = Privilege_Name;
-            this._StartDate = ConvertDate(StartDate);
-            this._EndDate = ConvertDate(EndDate);
+            if (StartDate.Year >= 1000)
+            {
+                this._StartDate = ConvertDate(StartDate);
+            }
+            else
+            {
+                this._StartDate = ConvertDate(DateTime.Today);
+            }
+            if (StartDate.Year >= 1000)
+            {
+                this._EndDate = ConvertDate(EndDate);
+            }
+            else
+            {
+                this._EndDate = ConvertDate(DateTime.Today.AddDays(1));
+            }
         }
         public UserPrivilege()
         {
@@ -52,6 +66,8 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 UserFeedback += "\r\n Het veld Naam is vereist.";
                 canSave = false;
+                Console.WriteLine("FM");
+                Console.ReadLine();
             }
 
             if (UserFeedback.Length != 0)

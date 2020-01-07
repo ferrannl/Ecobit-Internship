@@ -27,18 +27,18 @@ namespace EcobitStage.ViewModel.DataViewModel
             bool canSave = true;
             UserFeedback = "";
 
-            //if (string.IsNullOrWhiteSpace(Name))
-            //{
-            //    UserFeedback += "\r\n Het veld Naam is vereist.";
-            //    canSave = false;
-            //}
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                UserFeedback += "\r\n Het veld Naam is vereist.";
+                canSave = false;
+            }
 
-            //if (UserFeedback.Length != 0)
-            //{
-            //    string substringUserFeedback = UserFeedback.Substring(2);
-            //    UserFeedback = substringUserFeedback;
-            //}
-            //RaisePropertyChanged(() => UserFeedback);
+            if (UserFeedback.Length != 0)
+            {
+                string substringUserFeedback = UserFeedback.Substring(2);
+                UserFeedback = substringUserFeedback;
+            }
+            RaisePropertyChanged(() => UserFeedback);
 
             return canSave;
         }

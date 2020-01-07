@@ -41,7 +41,7 @@
                             <ComboBox
                                 Height="23"
                                 Margin="10,0"
-                                DisplayMemberPath="FirstName"
+                                DisplayMemberPath="Email"
                                 ItemsSource="{Binding ObservableUsers}"
                                 SelectedItem="{Binding SelectedUser}"
                                 SelectedValuePath="FirstName" />
@@ -75,7 +75,7 @@
                                 Margin="10,0"
                                 DisplayMemberPath="Name"
                                 ItemsSource="{Binding ObservablePrivileges}"
-                                SelectedItem="{Binding SelectedUserPrivilege.Privilege_Name}"
+                                SelectedItem="{Binding SelectedPrivilege}"
                                 SelectedValuePath="Name" />
                         </StackPanel>
 
