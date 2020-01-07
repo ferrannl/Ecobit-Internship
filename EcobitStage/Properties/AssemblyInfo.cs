@@ -10,10 +10,10 @@ using System.Windows;
 [assembly: AssemblyTitle("EcobitStage")]
 [assembly: AssemblyDescription("Made by: Ferran Hendriks")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("EcobitStage")]
+[assembly: AssemblyCompany("Ecobit")]
+[assembly: AssemblyProduct("EcobitStage by Ferran Hendriks")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Ferran Hendriks")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

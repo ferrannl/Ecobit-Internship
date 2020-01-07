@@ -79,7 +79,7 @@ namespace EcobitStage.ViewModel
                 List<Ecobit.Domain.Privilege> list = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
                 foreach (Ecobit.Domain.Privilege p in list)
                 {
-                    if (p.Name == SelectedPrivilege.Name)
+                    if (p.Name.ToLower() == SelectedPrivilege.Name.ToLower())
                     {
                         MessageBox.Show(SelectedPrivilege.Name + " bestaat al.",
                             "Bestaat al", MessageBoxButton.OK);

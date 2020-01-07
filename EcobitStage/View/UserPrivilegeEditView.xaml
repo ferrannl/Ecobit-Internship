@@ -41,10 +41,10 @@
                             <ComboBox
                                 Height="23"
                                 Margin="10,0"
-                                DisplayMemberPath="Name"
+                                DisplayMemberPath="FirstName"
                                 ItemsSource="{Binding Users}"
                                 SelectedItem="{Binding SelectedUserPrivilege.Fullname}"
-                                SelectedValuePath="Name" />
+                                SelectedValuePath="FirstName" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
@@ -109,7 +109,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,0">
-                    <TextBlock Foreground="Red" Text="{Binding SelectedCustomer.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedUserPrivilege.UserFeedback, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </Border>
