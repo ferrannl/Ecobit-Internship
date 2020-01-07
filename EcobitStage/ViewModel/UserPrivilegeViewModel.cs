@@ -91,8 +91,7 @@ namespace EcobitStage.ViewModel
         private void Save()
         {
             bool saved = true;
-            //Validation
-            if (true)
+            if (SelectedPrivilege.Validate() && SelectedUser.Validate() && SelectedUserPrivilege.Validate())
             {
                 Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedPrivilege.Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())

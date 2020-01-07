@@ -61,13 +61,15 @@ namespace EcobitStage.ViewModel.DataViewModel
         {
             bool canSave = true;
             UserFeedback = "";
-
-            if (string.IsNullOrWhiteSpace(Privilege_Name))
+            if (StartDate == null)
             {
-                UserFeedback += "\r\n Het veld Naam is vereist.";
+                UserFeedback += "\r\n Het veld Startdatum is vereist.";
                 canSave = false;
-                Console.WriteLine("FM");
-                Console.ReadLine();
+            }
+            if (EndDate != null && EndDate <= StartDate)
+            {
+                UserFeedback += "\r\n Het veld Einddatum moet na Startdatum zijn.";
+                canSave = false;
             }
 
             if (UserFeedback.Length != 0)

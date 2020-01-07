@@ -107,7 +107,11 @@
                         Command="{Binding CancelCommand}"
                         Content="Annuleren" />
                 </StackPanel>
-
+                <StackPanel Margin="0,10,0,0">
+                    <TextBlock Foreground="Red" Text="{Binding SelectedUserPrivilege.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedUser.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedPrivilege.UserFeedback, Mode=OneWay}" />
+                </StackPanel>
             </StackPanel>
         </Border>
     </ScrollViewer>
