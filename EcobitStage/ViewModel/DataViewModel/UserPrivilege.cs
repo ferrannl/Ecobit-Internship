@@ -72,15 +72,16 @@ namespace EcobitStage.ViewModel.DataViewModel
         {
             IsOverDate = false;
             IsAlmostOverDate = false;
-            if (Convert.ToDateTime(_EndDate) < DateTime.Today)
-            {
-                IsOverDate = true;
-                return;
-            } else if (Convert.ToDateTime(_EndDate) < DateTime.Today.AddDays(7))
+            if (Convert.ToDateTime(_EndDate) <= DateTime.Today.AddDays(7))
             {
                 IsAlmostOverDate = true;
-                return;
             }
+            if (Convert.ToDateTime(_EndDate) <= DateTime.Today)
+            {
+                IsAlmostOverDate = false;
+                IsOverDate = true;
+            }
+            return;
         }
 
         internal bool Validate()

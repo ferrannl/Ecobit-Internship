@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EcobitStage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="UserPrivilegeList"
     MinWidth="575"
     MinHeight="280"
@@ -43,6 +44,7 @@
                 </Button>
             </Grid>
             <StackPanel>
+                <Label Content="{Binding Source={x:Static sys:DateTime.Now}}" />
                 <DockPanel Margin="0,5">
                     <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>

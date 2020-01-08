@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecobit.Domain", "Ecobit.Dom
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Ecobit.Database", "Ecobit.Database\Ecobit.Database.sqlproj", "{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecobit.Repository", "Ecobit.Repository\Ecobit.Repository.csproj", "{0EE43210-7C1F-493B-9648-DE544C184B61}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{0EE43210-7C1F-493B-9648-DE544C184B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EE43210-7C1F-493B-9648-DE544C184B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EE43210-7C1F-493B-9648-DE544C184B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EE43210-7C1F-493B-9648-DE544C184B61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
