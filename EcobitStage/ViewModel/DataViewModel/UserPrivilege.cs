@@ -22,6 +22,8 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string Month { get; set; }
         public string Day { get; set; }
         public string Fullname { get; set; }
+        public bool IsOverDate { get; set; }
+        public bool IsAlmostOverDate { get; set; }
 
 
         public UserPrivilege(UserPrivilegeDTO DTO)
@@ -43,7 +45,27 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 this._StartDate = ConvertDate(DateTime.Today);
             }
+            if (EndDate.Year >= 1000)
+            {
+                this._EndDate = ConvertDate(EndDate);
+            }
+            else
+            {
+                this._EndDate = ConvertDate(DateTime.Today.AddDays(1));
+            }
+            OverDate();
+        }
+        public UserPrivilege()
+        {
             if (StartDate.Year >= 1000)
+            {
+                this._StartDate = ConvertDate(StartDate);
+            }
+            else
+            {
+                this._StartDate = ConvertDate(DateTime.Today);
+            }
+            if (EndDate.Year >= 1000)
             {
                 this._EndDate = ConvertDate(EndDate);
             }
@@ -52,9 +74,20 @@ namespace EcobitStage.ViewModel.DataViewModel
                 this._EndDate = ConvertDate(DateTime.Today.AddDays(1));
             }
         }
-        public UserPrivilege()
-        {
 
+        internal void OverDate()
+        {
+            IsOverDate = false;
+            IsAlmostOverDate = false;
+            if (EndDate > DateTime.Today)
+            {
+                IsOverDate = true;
+                return;
+            } else if (EndDate > DateTime.Today.AddDays(7))
+            {
+                IsAlmostOverDate = true;
+                return;
+            }
         }
 
         internal bool Validate()

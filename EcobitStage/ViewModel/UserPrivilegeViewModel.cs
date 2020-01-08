@@ -59,13 +59,11 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = null;
             SelectedPrivilege = null;
-            SelectedUserPrivilege = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
 
             DeleteCommand = new RelayCommand(Delete);
-            //SearchCommand = new RelayCommand(Search);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
@@ -77,14 +75,15 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = new DataViewModel.User(-1);
             SelectedPrivilege = new DataViewModel.Privilege();
+            SelectedUserPrivilege = null;
             SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             Edit();
         }
 
         private void Edit()
         {
+            //Removed refresh to fix bug in Save();
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
-            Refresh();
         }
 
         private void Cancel()
@@ -94,6 +93,9 @@ namespace EcobitStage.ViewModel
 
         private void Save()
         {
+            // Inconsistent bug where SelectedUserPrivilege is NULL //
+            // Occurs when: clicking on + button after selecting an item in the list.
+
             bool saved = true;
             if (SelectedPrivilege.Validate() && SelectedUser.Validate() && SelectedUserPrivilege.Validate())
             {

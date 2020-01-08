@@ -93,7 +93,20 @@
                         <DataGridTextColumn
                             Width="120*"
                             Binding="{Binding _EndDate}"
-                            Header="Eind Datum" />
+                            Header="Eind Datum">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedUserPrivilege.overDate}" Value="True">
+                                            <Setter Property="Background" Value="Red" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SelectedUserPrivilege.almostOverDate}" Value="True">
+                                            <Setter Property="Background" Value="Orange" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
