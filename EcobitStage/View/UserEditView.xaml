@@ -20,7 +20,7 @@
                         Grid.Row="0"
                         VerticalAlignment="Center"
                         FontSize="25">
-                        Gebruiker
+                        Gebruiker toevoegen
                     </TextBlock>
                 </StackPanel>
 

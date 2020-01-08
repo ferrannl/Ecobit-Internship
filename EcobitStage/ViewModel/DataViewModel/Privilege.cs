@@ -29,7 +29,7 @@ namespace EcobitStage.ViewModel.DataViewModel
 
             if (string.IsNullOrWhiteSpace(Name))
             {
-                UserFeedback += "\r\n Het veld Naam is vereist.";
+                UserFeedback += "\r\n Het veld `Toegankelijkheid` is vereist.";
                 canSave = false;
             }
 

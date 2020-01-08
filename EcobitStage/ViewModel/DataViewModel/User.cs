@@ -44,26 +44,26 @@ namespace EcobitStage.ViewModel.DataViewModel
 
             if (string.IsNullOrWhiteSpace(FirstName))
             {
-                UserFeedback += "\r\n Het veld Naam is vereist.";
+                UserFeedback += "\r\n Het veld `Voornaam` is vereist.";
                 canSave = false;
             }
 
             if (string.IsNullOrWhiteSpace(LastName))
             {
-                UserFeedback += "\r\n Het veld Achternaam is vereist.";
+                UserFeedback += "\r\n Het veld `Achternaam` is vereist.";
                 canSave = false;
             }
 
             if (string.IsNullOrWhiteSpace(Email))
             {
-                UserFeedback += "\r\n Het veld Email is vereist.";
+                UserFeedback += "\r\n Het veld `Email` is vereist.";
                 canSave = false;
             }
             else if (!Regex.IsMatch(Email, @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
             + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
             + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$"))
             {
-                UserFeedback += "\r\n Het veld Email is niet valide.";
+                UserFeedback += "\r\n Het veld `Email` is niet valide.";
                 canSave = false;
             }
            
@@ -75,7 +75,24 @@ namespace EcobitStage.ViewModel.DataViewModel
             RaisePropertyChanged(() => UserFeedback);
             return canSave;
         }
+        internal bool ValidateUserPrivilege()
+        {
+            bool canSave = true;
+            UserFeedback = "";
 
+            if (string.IsNullOrWhiteSpace(FirstName))
+            {
+                UserFeedback += "\r\n Het veld `Gebruiker` is vereist.";
+                canSave = false;
+            }    
+            if (UserFeedback.Length != 0)
+            {
+                string substringUserFeedback = UserFeedback.Substring(2);
+                UserFeedback = substringUserFeedback;
+            }
+            RaisePropertyChanged(() => UserFeedback);
+            return canSave;
+        }
         public DTO ConvertToDTO()
         {
             return new UserDTO(ID, FirstName, LastName, Email);

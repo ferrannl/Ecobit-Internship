@@ -59,14 +59,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         {
             if (StartDate.Year >= 1000)
             {
-                this._StartDate = ConvertDate(StartDate);
-            }
-            else
-            {
-                this._StartDate = ConvertDate(DateTime.Today);
-            }
-            if (EndDate.Year >= 1000)
-            {
                 this._EndDate = ConvertDate(EndDate);
             }
             else

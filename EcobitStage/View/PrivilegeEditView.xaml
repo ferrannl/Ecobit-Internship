@@ -20,7 +20,7 @@
                         Grid.Row="0"
                         VerticalAlignment="Center"
                         FontSize="25">
-                        Toegankelijkheden
+                        Toegankelijkheid toevoegen
                     </TextBlock>
                 </StackPanel>
 
@@ -35,7 +35,7 @@
                         HorizontalAlignment="Stretch"
                         Orientation="Vertical">
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
-                            <Label Content="Naam:" FontWeight="Bold" />
+                            <Label Content="Toegankelijkheid:" FontWeight="Bold" />
                             <TextBox
                                 Height="23"
                                 Margin="10,0"
