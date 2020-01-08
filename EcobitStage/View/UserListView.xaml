@@ -56,11 +56,13 @@
                         Command="{Binding SearchCommand}"
                         Content="Zoek" />
                     <Button
-                        Width="90"
+                        Width="20"
+                        Height="20"
                         Margin="5,0"
                         HorizontalAlignment="Left"
+                        Background="LightSteelBlue"
                         Command="{Binding RefreshCommand}"
-                        Content="Alle gebruikers" />
+                        Content="⭯" />
                 </DockPanel>
                 <DataGrid
                     Height="300"

@@ -42,6 +42,8 @@
                                 Height="23"
                                 Margin="10,0"
                                 DisplayMemberPath="Email"
+                                IsEditable="True"
+                                IsTextSearchEnabled="True"
                                 ItemsSource="{Binding ObservableUsers}"
                                 SelectedItem="{Binding SelectedUser}"
                                 SelectedValuePath="FirstName" />
@@ -74,6 +76,8 @@
                                 Height="23"
                                 Margin="10,0"
                                 DisplayMemberPath="Name"
+                                IsEditable="True"
+                                IsTextSearchEnabled="True"
                                 ItemsSource="{Binding ObservablePrivileges}"
                                 SelectedItem="{Binding SelectedPrivilege}"
                                 SelectedValuePath="Name" />

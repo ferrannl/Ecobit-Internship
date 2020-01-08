@@ -56,6 +56,14 @@
                         HorizontalAlignment="Left"
                         Command="{Binding SearchCommand}"
                         Content="Zoek" />
+                    <Button
+                        Width="20"
+                        Height="20"
+                        Margin="5,0"
+                        HorizontalAlignment="Left"
+                        Background="LightSteelBlue"
+                        Command="{Binding RefreshCommand}"
+                        Content="⭯" />
                 </DockPanel>
                 <DataGrid
                     Height="300"

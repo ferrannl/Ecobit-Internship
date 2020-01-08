@@ -2,15 +2,19 @@
 using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
-    public class UserPrivilegeViewModel : ViewModelBase
+    public class UserPrivilegeViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -67,9 +71,9 @@ namespace EcobitStage.ViewModel
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
-        }
+        }   
 
-        private void New()
+    private void New()
         {
             SelectedUser = new DataViewModel.User(-1);
             SelectedPrivilege = new DataViewModel.Privilege();

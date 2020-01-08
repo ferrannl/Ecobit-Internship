@@ -11,6 +11,7 @@ namespace EcobitStage.ViewModel
 {
     public class PrivilegeViewModel : ViewModelBase
     {
+        public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -46,12 +47,23 @@ namespace EcobitStage.ViewModel
             SelectedPrivilege = null;
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             DeleteCommand = new RelayCommand(Delete);
-            //SearchCommand = new RelayCommand(Search);
+            SearchCommand = new RelayCommand(Search);
+            RefreshCommand = new RelayCommand(Refresh);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
+        }
+
+        private void Search()
+        {
+            var query = SearchQuery.ToLower();
+            ObservablePrivileges.Clear();
+            foreach (DataViewModel.Privilege p in _privileges.Where(up => up.Name.ToLower().Contains(query) || up.Name.ToString() == query || up.Name.ToLower().Contains(query)))
+            {
+                ObservablePrivileges.Add(p);
+            }
         }
 
         private void New()
