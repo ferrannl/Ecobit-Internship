@@ -177,6 +177,7 @@ namespace EcobitStage.ViewModel
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.OverDate();
                     _userprivileges.Add(newUP);
                     ObservableUserPrivileges.Add(newUP);
                 }

@@ -68,15 +68,15 @@ namespace EcobitStage.ViewModel.DataViewModel
             OverDate();
         }
 
-        internal void OverDate()
+        public void OverDate()
         {
             IsOverDate = false;
             IsAlmostOverDate = false;
-            if (EndDate > DateTime.Today)
+            if (Convert.ToDateTime(_EndDate) < DateTime.Today)
             {
                 IsOverDate = true;
                 return;
-            } else if (EndDate > DateTime.Today.AddDays(7))
+            } else if (Convert.ToDateTime(_EndDate) < DateTime.Today.AddDays(7))
             {
                 IsAlmostOverDate = true;
                 return;
