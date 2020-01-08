@@ -64,15 +64,24 @@ namespace EcobitStage.ViewModel
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
 
+            SearchCommand = new RelayCommand(Search);
             DeleteCommand = new RelayCommand(Delete);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             Refresh();
-        }   
-
-    private void New()
+        }
+        private void Search()
+        {
+            var query = SearchQuery.ToLower();
+            ObservableUserPrivileges.Clear();
+            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Fullname.ToString() == query || up.Fullname.ToLower().Contains(query)))
+            {
+                ObservableUserPrivileges.Add(up);
+            }
+        }
+        private void New()
         {
             SelectedUser = new DataViewModel.User(-1);
             SelectedPrivilege = new DataViewModel.Privilege();
