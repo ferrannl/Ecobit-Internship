@@ -48,6 +48,7 @@ namespace EcobitStage.ViewModel
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             DeleteCommand = new RelayCommand(Delete);
             SearchCommand = new RelayCommand(Search);
+            RefreshCommand = new RelayCommand(Refresh);
             //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
@@ -59,9 +60,9 @@ namespace EcobitStage.ViewModel
         {
             var query = SearchQuery.ToLower();
             ObservableUsers.Clear();
-            foreach (User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.ID.ToString() == query || cust.Contact.ToLower().Contains(query)))
+            foreach (DataViewModel.User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.ID.ToString() == query || us.FirstName.ToLower().Contains(query)))
             {
-                ObservableCustomers.Add(c);
+                ObservableUsers.Add(u);
             }
         }
 

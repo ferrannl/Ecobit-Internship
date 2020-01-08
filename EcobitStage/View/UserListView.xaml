@@ -55,6 +55,12 @@
                         HorizontalAlignment="Left"
                         Command="{Binding SearchCommand}"
                         Content="Zoek" />
+                    <Button
+                        Width="90"
+                        Margin="5,0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding RefreshCommand}"
+                        Content="Alle gebruikers" />
                 </DockPanel>
                 <DataGrid
                     Height="300"
