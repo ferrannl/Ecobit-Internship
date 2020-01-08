@@ -98,10 +98,18 @@
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsOverDate}" Value="True">
-                                            <Setter Property="Background" Value="Red" />
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Opacity="0.4" Color="Red" />
+                                                </Setter.Value>
+                                            </Setter>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsAlmostOverDate}" Value="True">
-                                            <Setter Property="Background" Value="Orange" />
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Opacity="0.4" Color="Orange" />
+                                                </Setter.Value>
+                                            </Setter>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
