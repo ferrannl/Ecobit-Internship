@@ -97,10 +97,10 @@
                             <DataGridTextColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedUserPrivilege.overDate}" Value="True">
+                                        <DataTrigger Binding="{Binding IsOverDate}" Value="True">
                                             <Setter Property="Background" Value="Red" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding SelectedUserPrivilege.almostOverDate}" Value="True">
+                                        <DataTrigger Binding="{Binding IsAlmostOverDate}" Value="True">
                                             <Setter Property="Background" Value="Orange" />
                                         </DataTrigger>
                                     </Style.Triggers>

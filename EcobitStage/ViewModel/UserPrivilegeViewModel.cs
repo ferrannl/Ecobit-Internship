@@ -59,6 +59,7 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = null;
             SelectedPrivilege = null;
+            SelectedUserPrivilege = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();

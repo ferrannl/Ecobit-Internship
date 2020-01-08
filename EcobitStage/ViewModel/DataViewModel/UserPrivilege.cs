@@ -65,6 +65,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 this._EndDate = ConvertDate(DateTime.Today.AddDays(1));
             }
+            OverDate();
         }
 
         internal void OverDate()
