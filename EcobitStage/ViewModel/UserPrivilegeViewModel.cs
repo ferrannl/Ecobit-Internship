@@ -63,10 +63,9 @@ namespace EcobitStage.ViewModel
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
-
+            RefreshCommand = new RelayCommand(Refresh);
             SearchCommand = new RelayCommand(Search);
             DeleteCommand = new RelayCommand(Delete);
-            //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);

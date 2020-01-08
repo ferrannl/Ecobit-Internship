@@ -228,14 +228,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Repo\Account.png" />
-    <Resource Include="View\Repo\chevron-down.jpg" />
-    <Resource Include="View\Repo\chevron-up.jpg" />
     <Resource Include="View\Repo\Form.png" />
     <Resource Include="View\Repo\Logout.png" />
-    <Resource Include="View\Repo\plus.png" />
     <Resource Include="View\Repo\Privilege.png" />
     <Resource Include="View\Repo\programIcon.png" />
-    <Resource Include="View\Repo\times.jpg" />
     <Resource Include="View\Repo\User.png" />
     <Resource Include="View\Repo\UserPrivilege.png" />
   </ItemGroup>

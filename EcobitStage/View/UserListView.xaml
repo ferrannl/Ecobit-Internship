@@ -97,22 +97,6 @@
                                         Width="26"
                                         Height="26"
                                         HorizontalAlignment="Right"
-                                        Background="Orange"
-                                        BorderBrush="Transparent"
-                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        Content="✏️"
-                                        FontSize="15"
-                                        Foreground="White" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="26"
-                                        Height="26"
-                                        HorizontalAlignment="Right"
                                         Background="Crimson"
                                         BorderBrush="Transparent"
                                         Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"

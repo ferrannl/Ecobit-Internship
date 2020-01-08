@@ -18,12 +18,10 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string _StartDate { get; set; }
         public string _EndDate { get; set; }
         public string UserFeedback { get; set; }
-        public string Year { get; set; }
-        public string Month { get; set; }
-        public string Day { get; set; }
         public string Fullname { get; set; }
         public bool IsOverDate { get; set; }
         public bool IsAlmostOverDate { get; set; }
+        public bool IsSelected { get; set; }
 
 
         public UserPrivilege(UserPrivilegeDTO DTO)

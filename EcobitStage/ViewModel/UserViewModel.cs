@@ -49,7 +49,6 @@ namespace EcobitStage.ViewModel
             DeleteCommand = new RelayCommand(Delete);
             SearchCommand = new RelayCommand(Search);
             RefreshCommand = new RelayCommand(Refresh);
-            //EditCommand = new RelayCommand(Edit);
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);

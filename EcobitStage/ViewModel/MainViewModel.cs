@@ -86,7 +86,6 @@ namespace EcobitStage.ViewModel
             CurrentPage = factory.GetUri("UserPrivilegeEditView");
         }
 
-
         private void OpenLogout()
         {
             Account = null;

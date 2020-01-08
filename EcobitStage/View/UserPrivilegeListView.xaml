@@ -44,7 +44,6 @@
                 </Button>
             </Grid>
             <StackPanel>
-                <Label Content="{Binding Source={x:Static sys:DateTime.Now}}" />
                 <DockPanel Margin="0,5">
                     <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
@@ -117,22 +116,6 @@
                                 </Style>
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="26"
-                                        Height="26"
-                                        HorizontalAlignment="Right"
-                                        Background="Orange"
-                                        BorderBrush="Transparent"
-                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        Content="✏️"
-                                        FontSize="15"
-                                        Foreground="White" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
