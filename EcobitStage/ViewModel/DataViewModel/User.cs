@@ -59,10 +59,10 @@ namespace EcobitStage.ViewModel.DataViewModel
                 UserFeedback += "\r\n Het veld `Email` is vereist.";
                 canSave = false;
             }
-            else if (!Regex.IsMatch(Email, @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
-            + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
-            + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$"))
+            else if (Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
+                canSave = true;
+            } else{
                 UserFeedback += "\r\n Het veld `Email` is niet valide.";
                 canSave = false;
             }
