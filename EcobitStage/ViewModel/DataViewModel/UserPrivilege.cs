@@ -21,9 +21,8 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string Fullname { get; set; }
         public bool IsOverDate { get; set; }
         public bool IsAlmostOverDate { get; set; }
-        public bool IsSelected { get; set; }
-
-
+        public bool IsNotOverDate { get; set; }
+                
         public UserPrivilege(UserPrivilegeDTO DTO)
         {
             User_ID = DTO.User_ID;
@@ -70,6 +69,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         {
             IsOverDate = false;
             IsAlmostOverDate = false;
+            IsNotOverDate = false;
             if (Convert.ToDateTime(_EndDate) <= DateTime.Today.AddDays(7))
             {
                 IsAlmostOverDate = true;
@@ -78,6 +78,10 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 IsAlmostOverDate = false;
                 IsOverDate = true;
+            } if(Convert.ToDateTime(_EndDate) >= DateTime.Today.AddDays(7)){
+                IsNotOverDate = true;
+                IsAlmostOverDate = false;
+                IsOverDate = false;
             }
             return;
         }

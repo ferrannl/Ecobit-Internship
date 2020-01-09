@@ -23,6 +23,11 @@ namespace EcobitStage.ViewModel
         public ICommand NewCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        public ICommand IsOverDateCommand { get; set; }
+        public ICommand IsAlmostOverDateCommand { get; set; }
+        public ICommand IsNotOverDateCommand { get; set; }
+
+
         private string _searchQuery;
 
         public string SearchQuery
@@ -69,6 +74,10 @@ namespace EcobitStage.ViewModel
             NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            IsOverDateCommand = new RelayCommand(RefreshIsOverDate);
+            IsAlmostOverDateCommand = new RelayCommand(RefreshIsAlmostOverDate);
+            IsNotOverDateCommand = new RelayCommand(RefreshIsNotOverDate);
+
             Refresh();
         }
         private void Search()
@@ -224,6 +233,74 @@ namespace EcobitStage.ViewModel
                     ObservableUsers.Add(newU);
                 }
             }
+        }
+        private void RefreshIsOverDate()
+        {
+            _userprivileges.Clear();
+            ObservableUserPrivileges.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                foreach (Ecobit.Domain.UserPrivilege up in list)
+                {
+                    DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
+                    newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.OverDate();
+                    if (newUP.IsOverDate)
+                    {
+                        _userprivileges.Add(newUP);
+                        ObservableUserPrivileges.Add(newUP);
+                    }
+                }
+            }
+            RefreshPrivileges();
+            RefreshUsers();
+        }
+
+        private void RefreshIsAlmostOverDate()
+        {
+            _userprivileges.Clear();
+            ObservableUserPrivileges.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                foreach (Ecobit.Domain.UserPrivilege up in list)
+                {
+                    DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
+                    newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.OverDate();
+                    if (newUP.IsAlmostOverDate)
+                    {
+                        _userprivileges.Add(newUP);
+                        ObservableUserPrivileges.Add(newUP);
+                    }
+                }
+            }
+            RefreshPrivileges();
+            RefreshUsers();
+        }
+
+        private void RefreshIsNotOverDate()
+        {
+            _userprivileges.Clear();
+            ObservableUserPrivileges.Clear();
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                foreach (Ecobit.Domain.UserPrivilege up in list)
+                {
+                    DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
+                    newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.OverDate();
+                    if (newUP.IsNotOverDate)
+                    {
+                        _userprivileges.Add(newUP);
+                        ObservableUserPrivileges.Add(newUP);
+                    }
+                }
+            }
+            RefreshPrivileges();
+            RefreshUsers();
         }
     }
 }

@@ -62,9 +62,44 @@
                         Height="20"
                         Margin="5,0"
                         HorizontalAlignment="Left"
-                        Background="LightSteelBlue"
+                        Background="Purple"
+                        BorderBrush="Transparent"
                         Command="{Binding RefreshCommand}"
-                        Content="⭯" />
+                        Content="⭯"
+                        Foreground="White" />
+                    <StackPanel
+                        Margin="0,0,60,0"
+                        HorizontalAlignment="Right"
+                        FlowDirection="LeftToRight"
+                        Orientation="Horizontal">
+                        <Button
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            Background="Green"
+                            BorderBrush="Transparent"
+                            Command="{Binding IsNotOverDateCommand}"
+                            Content="🔍"
+                            Foreground="White" />
+                        <Button
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            Background="Orange"
+                            BorderBrush="Transparent"
+                            Command="{Binding IsAlmostOverDateCommand}"
+                            Content="🔍"
+                            Foreground="White" />
+                        <Button
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            Background="Red"
+                            BorderBrush="Transparent"
+                            Command="{Binding IsOverDateCommand}"
+                            Content="🔍"
+                            Foreground="White" />
+                    </StackPanel>
                 </DockPanel>
                 <DataGrid
                     Height="300"
@@ -86,7 +121,7 @@
                         <DataGridTextColumn
                             Width="120*"
                             Binding="{Binding Privilege_Name}"
-                            Header="Naam" />
+                            Header="Toegankelijkheid" />
                         <DataGridTextColumn
                             Width="120*"
                             Binding="{Binding _StartDate}"
@@ -109,6 +144,13 @@
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <SolidColorBrush Opacity="0.4" Color="Orange" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsNotOverDate}" Value="true">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Opacity="0.4" Color="Green" />
                                                 </Setter.Value>
                                             </Setter>
                                         </DataTrigger>
