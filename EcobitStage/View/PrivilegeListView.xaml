@@ -61,7 +61,7 @@
                         Height="20"
                         Margin="5,0"
                         HorizontalAlignment="Left"
-                        Background="LightSteelBlue"
+                        Background="Purple"
                         Command="{Binding RefreshCommand}"
                         Content="⭯" />
                 </DockPanel>
