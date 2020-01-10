@@ -14,40 +14,38 @@ using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+    public class ChangePasswordViewModel : ViewModelBase
     {
         public string Username { get; set; }
-        public ICommand LoginCommand { get; set; }
-        public ICommand ChangePasswordCommand { get; set; }
-        private MainViewModel _main;
+        public string OldPassword { get; set; }
+        public string OldPassword2 { get; set; }
+        public string NewPassword { get; set; }
         AccountDTO tempAccount = new AccountDTO();
-
-        public LoginViewModel(MainViewModel Main)
+        public ICommand NewPasswordCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        private MainViewModel _main;
+        //AccountDTO tempAccount = new AccountDTO();
+        public ChangePasswordViewModel(MainViewModel Main)
         {
             _main = Main;
-            LoginCommand = new RelayCommand<PasswordBox>(Login);
-            ChangePasswordCommand = new RelayCommand(ChangePassword);
+            CancelCommand = new RelayCommand(_main.OpenLogout);
+            //NewPasswordCommand = new RelayCommand<PasswordBox>(ChangePassword);
         }
-        private void Login(PasswordBox PasswordBox)
-        {
-            if (string.IsNullOrWhiteSpace(Username))
-            {
-                MessageBox.Show("Gebruikersnaam invullen a.u.b.");
-                return;
-            }
 
+        public void ChangePassword()
+        {
             AccountDTO account = GetAccountByUsername(Username);
             if (account != null)
             {
-                if (VerifyPassword(account.ID, PasswordBox.Password))
-                {
-                    _main.Login(new AccountViewModel(account));
-                    PasswordBox.Password = null;
-                }
-                else
-                {
-                    MessageBox.Show("Inlog gegevens zijn incorrect.");
-                }
+                //if (VerifyPassword(account.ID, PasswordBox.Password))
+                //{
+                //    _main.Login(new AccountViewModel(account));
+                //    PasswordBox.Password = null;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Inlog gegevens zijn incorrect.");
+                //}
             }
             else
             {
@@ -108,9 +106,7 @@ namespace EcobitStage.ViewModel
             }
 
         }
-        private void ChangePassword()
-        {
-            _main.OpenChangePasswordView();
-        }
+    
     }
-}
+    }
+

@@ -63,7 +63,8 @@
                         HorizontalAlignment="Left"
                         Background="Purple"
                         Command="{Binding RefreshCommand}"
-                        Content="⭯" />
+                        Content="⭯"
+                        Foreground="White" />
                 </DockPanel>
                 <DataGrid
                     Height="300"

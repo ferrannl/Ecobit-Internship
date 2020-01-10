@@ -85,8 +85,13 @@ namespace EcobitStage.ViewModel
         {
             CurrentPage = factory.GetUri("UserPrivilegeEditView");
         }
+        public void OpenChangePasswordView()
+        {
+            CurrentPage = factory.GetUri("ChangePasswordView");
+        }
 
-        private void OpenLogout()
+
+        public void OpenLogout()
         {
             Account = null;
             TopText = "Inloggen";

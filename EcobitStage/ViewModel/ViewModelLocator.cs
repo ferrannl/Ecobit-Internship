@@ -15,6 +15,7 @@ namespace EcobitStage.ViewModel
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<UserPrivilegeViewModel>();
             SimpleIoc.Default.Register<PrivilegeViewModel>();
+            SimpleIoc.Default.Register<ChangePasswordViewModel>();
             SimpleIoc.Default.Register<UserViewModel>();
 
         }
@@ -52,6 +53,13 @@ namespace EcobitStage.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<UserViewModel>();
+            }
+        }
+        public ChangePasswordViewModel ChangePassword
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ChangePasswordViewModel>();
             }
         }
     }

@@ -57,7 +57,16 @@
                 Margin="2,2,2,2"
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding ElementName=PasswordBox}"
-                Content="Inloggen" />
+                Content="Log in" />
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink Command="{Binding ChangePasswordCommand}">
+                    <Label
+                        Content="Wachtwoord wijzigen"
+                        FontSize="8"
+                        Foreground="#4c8bf5" />
+                </Hyperlink>
+            </TextBlock>
         </StackPanel>
+
     </StackPanel>
 </Page>
