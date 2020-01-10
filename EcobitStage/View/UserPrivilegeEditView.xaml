@@ -43,10 +43,11 @@
                                 Margin="10,0"
                                 DisplayMemberPath="Email"
                                 IsEditable="True"
-                                IsTextSearchEnabled="True"
+                                IsTextSearchEnabled="False"
                                 ItemsSource="{Binding ObservableUsers}"
                                 SelectedItem="{Binding SelectedUser}"
-                                SelectedValuePath="FirstName" />
+                                SelectedValuePath="FirstName"
+                                Text="{Binding SelectedUser.Email}" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
@@ -77,10 +78,11 @@
                                 Margin="10,0"
                                 DisplayMemberPath="Name"
                                 IsEditable="True"
-                                IsTextSearchEnabled="True"
+                                IsTextSearchEnabled="False"
                                 ItemsSource="{Binding ObservablePrivileges}"
                                 SelectedItem="{Binding SelectedPrivilege}"
-                                SelectedValuePath="Name" />
+                                SelectedValuePath="Name"
+                                Text="{Binding SelectedPrivilege.Name}" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">

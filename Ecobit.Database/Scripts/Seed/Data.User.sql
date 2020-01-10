@@ -1,10 +1,10 @@
 ﻿--/*==================================================User====================================*/
 
---INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Janet', N'Castile', N'JanetRCastile@jourrapide.com');
---INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Sara ', N'Jackson', N'SaraRJackson@jourrapide.com');
---INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Helen', N'Alvarez', N'HelenCAlvarez@teleworm.us');
---INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Janet', N'Brown', N'JeffreyABrown@jourrapide.com');
---INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Carlos', N'Ullman', N'CarlosEUllman@teleworm.us');
+INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Janet', N'Castile', N'JanetRCastile@jourrapide.com');
+INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Sara ', N'Jackson', N'SaraRJackson@jourrapide.com');
+INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Helen', N'Alvarez', N'HelenCAlvarez@teleworm.us');
+INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Janet', N'Brown', N'JeffreyABrown@jourrapide.com');
+INSERT INTO [dbo].[User] ([FirstName], [LastName], [E-mail]) VALUES (N'Carlos', N'Ullman', N'CarlosEUllman@teleworm.us');
 
 --/*==================================================UserPrivilege====================================*/
 

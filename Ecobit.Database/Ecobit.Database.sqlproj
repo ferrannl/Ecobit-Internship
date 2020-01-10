@@ -62,9 +62,6 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Ecobit.Database.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <PostDeploy Include="Scripts\Seed\UserPrivilege.sql" />
     <None Include="Scripts\Seed\Data.Account.sql" />
   </ItemGroup>

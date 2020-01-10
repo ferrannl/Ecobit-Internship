@@ -90,7 +90,6 @@ namespace EcobitStage.ViewModel
             CurrentPage = factory.GetUri("ChangePasswordView");
         }
 
-
         public void OpenLogout()
         {
             Account = null;

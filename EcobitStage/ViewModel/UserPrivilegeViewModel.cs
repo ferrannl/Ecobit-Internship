@@ -77,7 +77,6 @@ namespace EcobitStage.ViewModel
             IsOverDateCommand = new RelayCommand(RefreshIsOverDate);
             IsAlmostOverDateCommand = new RelayCommand(RefreshIsAlmostOverDate);
             IsNotOverDateCommand = new RelayCommand(RefreshIsNotOverDate);
-
             Refresh();
         }
         private void Search()
@@ -120,7 +119,26 @@ namespace EcobitStage.ViewModel
                 Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedPrivilege.Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())
                 {
+
                     List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                    List<Ecobit.Domain.Privilege> listprivileges = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
+
+                    var existingUser = context.User.Where(u => u.E_mail.Equals(SelectedUser.Email));
+                    if (existingUser.Count() == 0)
+                    {
+                        saved = false;
+                        MessageBox.Show("Gebruiker " + SelectedUser.Email + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
+                        return;
+                    }
+                    var existingPrivilege = context.Privilege.Where(s => s.Name.Equals(SelectedPrivilege.Name));
+                    if (existingPrivilege.Count() == 0)
+                    {
+                        saved = false;
+                        MessageBox.Show("Toegankelijkheid " + SelectedPrivilege.Name + " bestaat niet.", "Bestaat niet" ,MessageBoxButton.OK);
+                        return;
+
+                    }
+
 
                     foreach (Ecobit.Domain.UserPrivilege up in list)
                     {

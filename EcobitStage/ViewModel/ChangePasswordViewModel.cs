@@ -18,7 +18,6 @@ namespace EcobitStage.ViewModel
     {
         public string Username { get; set; }
         public string OldPassword { get; set; }
-        public string OldPassword2 { get; set; }
         public string NewPassword { get; set; }
         AccountDTO tempAccount = new AccountDTO();
         public ICommand NewPasswordCommand { get; set; }
@@ -29,23 +28,37 @@ namespace EcobitStage.ViewModel
         {
             _main = Main;
             CancelCommand = new RelayCommand(_main.OpenLogout);
-            //NewPasswordCommand = new RelayCommand<PasswordBox>(ChangePassword);
+            NewPasswordCommand = new RelayCommand<PasswordBox>(ChangePassword);
         }
 
-        public void ChangePassword()
+        public void ChangePassword(PasswordBox PasswordBox)
         {
             AccountDTO account = GetAccountByUsername(Username);
             if (account != null)
             {
-                //if (VerifyPassword(account.ID, PasswordBox.Password))
-                //{
-                //    _main.Login(new AccountViewModel(account));
-                //    PasswordBox.Password = null;
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Inlog gegevens zijn incorrect.");
-                //}
+                if (!string.IsNullOrWhiteSpace(OldPassword))
+                {
+                    if (!string.IsNullOrEmpty(PasswordBox.Password)){
+                        if (VerifyPassword(account.ID))
+                        {
+                            //Do this after old passwords are correct
+                            PasswordBox.Password = null;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Inlog gegevens zijn incorrect.");
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vul een nieuw wachtwoord in.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vul het oude wachtwoord in.");
+                }
             }
             else
             {
@@ -53,12 +66,14 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        public bool VerifyPassword(int id, string password)
+        public bool VerifyPassword(int id)
         {
             string hash;
+
             using (MD5 md5Hash = MD5.Create())
             {
-                hash = GetMd5Hash(md5Hash, password);
+                hash = GetMd5Hash(md5Hash, OldPassword);
+
             }
 
             {
@@ -76,6 +91,8 @@ namespace EcobitStage.ViewModel
                 return false;
             }
         }
+
+
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
@@ -106,7 +123,7 @@ namespace EcobitStage.ViewModel
             }
 
         }
-    
-    }
+
     }
 
+}
