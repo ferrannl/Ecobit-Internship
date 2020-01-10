@@ -47,6 +47,7 @@
                                 ItemsSource="{Binding ObservableUsers}"
                                 SelectedItem="{Binding SelectedUser}"
                                 SelectedValuePath="FirstName"
+                                TabIndex="0"
                                 Text="{Binding SelectedUser.Email}" />
                         </StackPanel>
 
@@ -82,6 +83,7 @@
                                 ItemsSource="{Binding ObservablePrivileges}"
                                 SelectedItem="{Binding SelectedPrivilege}"
                                 SelectedValuePath="Name"
+                                TabIndex="1"
                                 Text="{Binding SelectedPrivilege.Name}" />
                         </StackPanel>
 
@@ -114,9 +116,9 @@
                         Content="Annuleren" />
                 </StackPanel>
                 <StackPanel Margin="0,0,0,0">
-                    <TextBlock Foreground="Red" Text="{Binding SelectedUserPrivilege.UserFeedback, Mode=OneWay}" />
                     <TextBlock Foreground="Red" Text="{Binding SelectedUser.UserFeedback, Mode=OneWay}" />
                     <TextBlock Foreground="Red" Text="{Binding SelectedPrivilege.UserFeedback, Mode=OneWay}" />
+                    <TextBlock Foreground="Red" Text="{Binding SelectedUserPrivilege.UserFeedback, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </Border>

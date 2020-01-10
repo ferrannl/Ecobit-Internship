@@ -40,6 +40,7 @@
                                 Height="23"
                                 Margin="10,0"
                                 MaxLength="175"
+                                TabIndex="0"
                                 Text="{Binding SelectedUser.FirstName}" />
                         </StackPanel>
 
@@ -49,6 +50,7 @@
                                 Height="23"
                                 Margin="10,0"
                                 MaxLength="175"
+                                TabIndex="2"
                                 Text="{Binding SelectedUser.Email}" />
                         </StackPanel>
                     </StackPanel>
@@ -63,6 +65,7 @@
                                 Height="23"
                                 Margin="10,0"
                                 MaxLength="175"
+                                TabIndex="1"
                                 Text="{Binding SelectedUser.LastName}" />
                         </StackPanel>
                     </StackPanel>

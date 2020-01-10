@@ -88,8 +88,17 @@ namespace EcobitStage.ViewModel
                 Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email };
                 using (var context = new EcobitDBEntities())
                 {
-                    context.User.Add(addUser);
-                    context.SaveChanges();
+                    var existingUser = context.User.Where(u => u.E_mail.Equals(addUser.E_mail));
+                    if (existingUser.Count() != 0)
+                    {
+                        MessageBox.Show("Gebruiker " + SelectedUser.Email + " bestaat al.", "Bestaat al", MessageBoxButton.OK);
+                        return;
+                    }
+                    else
+                    {
+                        context.User.Add(addUser);
+                        context.SaveChanges();
+                    }
                 }
                 Refresh();
                 Cancel();

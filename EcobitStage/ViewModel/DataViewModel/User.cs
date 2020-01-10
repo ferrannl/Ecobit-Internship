@@ -80,7 +80,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             bool canSave = true;
             UserFeedback = "";
 
-            if (string.IsNullOrWhiteSpace(FirstName))
+            if (string.IsNullOrWhiteSpace(Email))
             {
                 UserFeedback += "\r\n Het veld `Gebruiker` is vereist.";
                 canSave = false;
