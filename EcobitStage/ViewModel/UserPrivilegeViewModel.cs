@@ -171,7 +171,7 @@ namespace EcobitStage.ViewModel
         //Delete UserPrivilege
         private void Delete()
         {
-            if (MessageBox.Show("Wil je deze gebruikertoegang verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedUserPrivilege.Fullname + " - " + SelectedUserPrivilege.Privilege_Name + " verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())

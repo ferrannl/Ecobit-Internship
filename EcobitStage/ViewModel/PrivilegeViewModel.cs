@@ -116,7 +116,7 @@ namespace EcobitStage.ViewModel
 
         private void Delete()
         {
-            if (MessageBox.Show("Wil je " + SelectedPrivilege + " verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedPrivilege.Name + " verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())

@@ -1,5 +1,6 @@
 ﻿using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
+using System.Text.RegularExpressions;
 
 namespace EcobitStage.ViewModel.DataViewModel
 {
@@ -33,6 +34,12 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 UserFeedback += "\r\n Het veld `Toegankelijkheid` is vereist.";
                 canSave = false;
+            } else if (Regex.IsMatch(Name, @"[a-zA-Z]")) {
+                canSave = true;
+            }
+            else
+            {
+                UserFeedback += "\r\n Het veld `Naam` is niet valide.";
             }
 
             if (UserFeedback.Length != 0)

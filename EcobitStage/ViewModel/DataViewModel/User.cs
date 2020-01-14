@@ -46,11 +46,27 @@ namespace EcobitStage.ViewModel.DataViewModel
                 UserFeedback += "\r\n Het veld `Voornaam` is vereist.";
                 canSave = false;
             }
+            else if (Regex.IsMatch(FirstName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$"))
+            {
+                canSave = true;
+            }
+            else
+            {
+                UserFeedback += "\r\n Het veld `Voornaam` is niet valide.";
+            }
 
             if (string.IsNullOrWhiteSpace(LastName))
             {
                 UserFeedback += "\r\n Het veld `Achternaam` is vereist.";
                 canSave = false;
+            }
+            else if (Regex.IsMatch(LastName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$"))
+            {
+                canSave = true;
+            }
+            else
+            {
+                UserFeedback += "\r\n Het veld `Achternaam` is niet valide.";
             }
 
             if (string.IsNullOrWhiteSpace(Email))
