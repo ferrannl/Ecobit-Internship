@@ -19,14 +19,13 @@ namespace EcobitStage.ViewModel
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         private AccountDTO tempAccount = new AccountDTO();
+        private Account tempAccountDB = new Account();
         public ICommand NewPasswordCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        private MainViewModel _main;
 
         public ChangePasswordViewModel(MainViewModel Main)
         {
-            _main = Main;
-            CancelCommand = new RelayCommand(_main.OpenLogout);
+            CancelCommand = new RelayCommand(Cancel);
             NewPasswordCommand = new RelayCommand<PasswordBox>(ChangePassword);
         }
 
@@ -45,13 +44,21 @@ namespace EcobitStage.ViewModel
                         if (VerifyPassword(account.ID))
                         {
                             //Change password is old passwords are correct
-                            MessageBox.Show("Inlog gegevens zijn CORRECT!");
                             using (var context = new EcobitDBEntities())
                             {
-                                try
+                                List<Account> tempList = new List<Account>(context.Account.ToList());
+                                tempAccountDB = null;
+                                foreach (Account a in tempList)
                                 {
+                                    if (a.Username.Equals(account.Username))
+                                    {
+                                        tempAccountDB = a;
+                                        tempAccountDB.Password = CreateNewPassword(PasswordBox.Password);
+                                        context.SaveChanges();
+                                        MessageBox.Show("Wachtwoord is gewijzigd");
+                                        Cancel();
+                                    }
                                 }
-                                catch (Exception e) { }
                             }
                             PasswordBox.Password = null;
                         }
@@ -100,6 +107,19 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        public string CreateNewPassword(string password)
+        {
+            //Hashes password and check if it's correct
+            string hash;
+            using (MD5 md5Hash = MD5.Create())
+            {
+                hash = GetMd5Hash(md5Hash, password);
+            }
+            {
+                return hash;
+            }
+        }
+
         //Hash password
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
@@ -128,6 +148,10 @@ namespace EcobitStage.ViewModel
                 }
                 return null;
             }
+        }
+        public void Cancel()
+        {
+            CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenLogout();
         }
     }
 }

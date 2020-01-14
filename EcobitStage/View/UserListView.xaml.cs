@@ -11,5 +11,9 @@ namespace EcobitStage.View
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged()
+        {
+        }
     }
 }

@@ -87,6 +87,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         }
 
         #region Validate
+
         //Check for empty or invalid fields
                 internal bool Validate()
         {
@@ -112,7 +113,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             return canSave;
         }
 
-        #endregion
+        #endregion Validate
 
         public string ConvertDate(DateTime date)
         {

@@ -42,8 +42,11 @@
                 </Button>
             </Grid>
             <StackPanel>
-                <DockPanel Margin="0,5">
-                    <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
+                <DockPanel Margin="0,5,0,5">
+                    <TextBox
+                        MinWidth="150"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
                             <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
@@ -51,19 +54,26 @@
                     </TextBox>
                     <Button
                         Width="50"
-                        Margin="5,0"
+                        Margin="5,0,0,0"
                         HorizontalAlignment="Left"
                         Command="{Binding SearchCommand}"
                         Content="Zoek" />
                     <Button
-                        Width="20"
-                        Height="20"
-                        Margin="5,0"
+                        Width="24"
+                        Height="24"
+                        Margin="4,0,4,0"
                         HorizontalAlignment="Left"
-                        Background="Purple"
-                        Command="{Binding RefreshCommand}"
-                        Content="⭯"
-                        Foreground="White" />
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding RefreshCommand}">
+                        <Image
+                            Width="24"
+                            Height="24"
+                            Margin="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="/View/Repo/Remove_Filter_Black.png" />
+                    </Button>
                 </DockPanel>
                 <DataGrid
                     Height="300"
@@ -78,7 +88,6 @@
                     SelectedItem="{Binding SelectedUser}"
                     SelectionMode="Single">
                     <DataGrid.Columns>
-
                         <DataGridTextColumn
                             Width="100*"
                             Binding="{Binding FirstName}"

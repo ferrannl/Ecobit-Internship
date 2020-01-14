@@ -23,6 +23,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         }
 
         #region Validate
+
         internal bool Validate()
         {
             bool canSave = true;
@@ -43,7 +44,8 @@ namespace EcobitStage.ViewModel.DataViewModel
 
             return canSave;
         }
-        #endregion
+
+        #endregion Validate
 
         public DTO ConvertToDTO()
         {
