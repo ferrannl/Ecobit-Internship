@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EcobitStage.DataTransfer
 {
@@ -10,7 +6,6 @@ namespace EcobitStage.DataTransfer
     {
         public UserPrivilegeDTO()
         {
-
         }
 
         public UserPrivilegeDTO(int User_ID, string Privilege_Name, DateTime StartDate, DateTime EndDate)

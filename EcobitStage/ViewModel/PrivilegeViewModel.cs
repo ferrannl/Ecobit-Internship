@@ -11,6 +11,8 @@ namespace EcobitStage.ViewModel
 {
     public class PrivilegeViewModel : ViewModelBase
     {
+        #region Commands
+
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -19,6 +21,8 @@ namespace EcobitStage.ViewModel
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         private string _searchQuery;
+
+        #endregion Commands
 
         public string SearchQuery
         {

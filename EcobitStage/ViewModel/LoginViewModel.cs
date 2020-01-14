@@ -2,12 +2,10 @@
 using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,16 +18,20 @@ namespace EcobitStage.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
         private MainViewModel _main;
-        AccountDTO tempAccount = new AccountDTO();
+        private AccountDTO tempAccount = new AccountDTO();
 
+        //Initialize login view
         public LoginViewModel(MainViewModel Main)
         {
             _main = Main;
             LoginCommand = new RelayCommand<PasswordBox>(Login);
             ChangePasswordCommand = new RelayCommand(ChangePassword);
         }
+
+        //Login verification
         private void Login(PasswordBox PasswordBox)
         {
+            //Check username
             if (string.IsNullOrWhiteSpace(Username))
             {
                 MessageBox.Show("Gebruikersnaam invullen a.u.b.");
@@ -39,6 +41,7 @@ namespace EcobitStage.ViewModel
             AccountDTO account = GetAccountByUsername(Username);
             if (account != null)
             {
+                //Check password
                 if (VerifyPassword(account.ID, PasswordBox.Password))
                 {
                     _main.Login(new AccountViewModel(account));
@@ -55,14 +58,19 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        private void ChangePassword()
+        {
+            _main.OpenChangePasswordView();
+        }
+
         public bool VerifyPassword(int id, string password)
         {
+            //Hashes password and check if it's correct
             string hash;
             using (MD5 md5Hash = MD5.Create())
             {
                 hash = GetMd5Hash(md5Hash, password);
             }
-
             {
                 using (var context = new EcobitDBEntities())
                 {
@@ -79,6 +87,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Hashes password
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
@@ -106,11 +115,6 @@ namespace EcobitStage.ViewModel
                 }
                 return null;
             }
-
-        }
-        private void ChangePassword()
-        {
-            _main.OpenChangePasswordView();
         }
     }
 }

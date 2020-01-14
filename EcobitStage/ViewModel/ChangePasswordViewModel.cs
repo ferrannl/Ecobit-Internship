@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,11 +18,11 @@ namespace EcobitStage.ViewModel
         public string Username { get; set; }
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
-        AccountDTO tempAccount = new AccountDTO();
+        private AccountDTO tempAccount = new AccountDTO();
         public ICommand NewPasswordCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         private MainViewModel _main;
-        //AccountDTO tempAccount = new AccountDTO();
+
         public ChangePasswordViewModel(MainViewModel Main)
         {
             _main = Main;
@@ -33,22 +32,33 @@ namespace EcobitStage.ViewModel
 
         public void ChangePassword(PasswordBox PasswordBox)
         {
+            // Account exists.
             AccountDTO account = GetAccountByUsername(Username);
             if (account != null)
             {
+                //Old pw box is empty
                 if (!string.IsNullOrWhiteSpace(OldPassword))
                 {
-                    if (!string.IsNullOrEmpty(PasswordBox.Password)){
+                    //New pw box is empty
+                    if (!string.IsNullOrEmpty(PasswordBox.Password))
+                    {
                         if (VerifyPassword(account.ID))
                         {
-                            //Do this after old passwords are correct
+                            //Change password is old passwords are correct
+                            MessageBox.Show("Inlog gegevens zijn CORRECT!");
+                            using (var context = new EcobitDBEntities())
+                            {
+                                try
+                                {
+                                }
+                                catch (Exception e) { }
+                            }
                             PasswordBox.Password = null;
                         }
                         else
                         {
                             MessageBox.Show("Inlog gegevens zijn incorrect.");
                         }
-
                     }
                     else
                     {
@@ -68,14 +78,12 @@ namespace EcobitStage.ViewModel
 
         public bool VerifyPassword(int id)
         {
+            //Hashes password and check if it's correct
             string hash;
-
             using (MD5 md5Hash = MD5.Create())
             {
                 hash = GetMd5Hash(md5Hash, OldPassword);
-
             }
-
             {
                 using (var context = new EcobitDBEntities())
                 {
@@ -92,8 +100,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
-
-
+        //Hash password
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
@@ -121,9 +128,6 @@ namespace EcobitStage.ViewModel
                 }
                 return null;
             }
-
         }
-
     }
-
 }

@@ -1,21 +1,19 @@
 ﻿using Ecobit.Domain;
-using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
     public class UserPrivilegeViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        #region Commands
+
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -27,6 +25,7 @@ namespace EcobitStage.ViewModel
         public ICommand IsAlmostOverDateCommand { get; set; }
         public ICommand IsNotOverDateCommand { get; set; }
 
+        #endregion Commands
 
         private string _searchQuery;
 
@@ -60,6 +59,7 @@ namespace EcobitStage.ViewModel
             Initialize();
         }
 
+        //Initialize... create Commandfunctions
         private void Initialize()
         {
             SelectedUser = null;
@@ -79,6 +79,8 @@ namespace EcobitStage.ViewModel
             IsNotOverDateCommand = new RelayCommand(RefreshIsNotOverDate);
             Refresh();
         }
+
+        //Search function
         private void Search()
         {
             var query = SearchQuery.ToLower();
@@ -88,6 +90,8 @@ namespace EcobitStage.ViewModel
                 ObservableUserPrivileges.Add(up);
             }
         }
+
+        //Create new UserPrivilege
         private void New()
         {
             SelectedUser = new DataViewModel.User(-1);
@@ -97,32 +101,36 @@ namespace EcobitStage.ViewModel
             Edit();
         }
 
+        //Add UserPrivilege (Button)
         private void Edit()
         {
             //Removed refresh to fix bug in Save();
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
         }
 
+        //Cancel, escape
         private void Cancel()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeListView();
         }
 
+        //Save newly created UserPrivilege
         private void Save()
         {
             // Inconsistent bug where SelectedUserPrivilege is NULL //
             // Occurs when: clicking on + button after selecting an item in the list.
 
+            //Validate all fields
             bool saved = true;
-            if (SelectedUser.ValidateUserPrivilege() && SelectedPrivilege.Validate() &&  SelectedUserPrivilege.Validate())
+            if (SelectedUser.ValidateUserPrivilege() && SelectedPrivilege.Validate() && SelectedUserPrivilege.Validate())
             {
                 Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedPrivilege.Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())
                 {
-
                     List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
                     List<Ecobit.Domain.Privilege> listprivileges = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
 
+                    //Check if Privilege exists
                     var existingUser = context.User.Where(u => u.E_mail.Equals(SelectedUser.Email));
                     if (existingUser.Count() == 0)
                     {
@@ -130,15 +138,15 @@ namespace EcobitStage.ViewModel
                         MessageBox.Show("Gebruiker " + SelectedUser.Email + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
                         return;
                     }
+                    //Check if User exists
                     var existingPrivilege = context.Privilege.Where(s => s.Name.Equals(SelectedPrivilege.Name));
                     if (existingPrivilege.Count() == 0)
                     {
                         saved = false;
-                        MessageBox.Show("Toegankelijkheid " + SelectedPrivilege.Name + " bestaat niet.", "Bestaat niet" ,MessageBoxButton.OK);
+                        MessageBox.Show("Toegankelijkheid " + SelectedPrivilege.Name + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
                         return;
-
                     }
-
+                    //Check if combination User and Privilege exists
                     foreach (Ecobit.Domain.UserPrivilege up in list)
                     {
                         if (up.Privilege_Name.ToLower() == SelectedPrivilege.Name.ToLower() && up.User_ID == SelectedUser.ID)
@@ -159,6 +167,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Delete UserPrivilege
         private void Delete()
         {
             if (MessageBox.Show("Wil je deze gebruikertoegang verwijderen?",
@@ -179,6 +188,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Get and create fullname from User ID.
         public string GetFullnameByID(int id)
         {
             string fullname = null;
@@ -188,7 +198,6 @@ namespace EcobitStage.ViewModel
 
                 var user = context.User.FirstOrDefault(i => i.ID == id);
                 fullname = user.FirstName + " " + user.LastName;
-
             }
             if (fullname != null)
             {
@@ -200,6 +209,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Refresh all lists
         private void Refresh()
         {
             _userprivileges.Clear();
@@ -219,6 +229,9 @@ namespace EcobitStage.ViewModel
             RefreshPrivileges();
             RefreshUsers();
         }
+
+        #region Nested refreshes
+
         private void RefreshPrivileges()
 
         {
@@ -251,6 +264,7 @@ namespace EcobitStage.ViewModel
                 }
             }
         }
+
         private void RefreshIsOverDate()
         {
             _userprivileges.Clear();
@@ -319,5 +333,7 @@ namespace EcobitStage.ViewModel
             RefreshPrivileges();
             RefreshUsers();
         }
+
+        #endregion Nested refreshes
     }
 }

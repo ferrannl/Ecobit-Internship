@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using EcobitStage.DataTransfer;
+﻿using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
+using System.Text.RegularExpressions;
 
 namespace EcobitStage.ViewModel.DataViewModel
 {
@@ -17,7 +12,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string Email { get; set; }
         public string UserFeedback { get; set; }
 
-
         public User(UserDTO DTO)
         {
             ID = DTO.ID;
@@ -25,6 +19,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             LastName = DTO.LastName;
             Email = DTO.Email;
         }
+
         public User(int ID, string FirstName, string LastName, string Email)
         {
             this.ID = ID;
@@ -32,11 +27,14 @@ namespace EcobitStage.ViewModel.DataViewModel
             this.LastName = LastName;
             this.Email = Email;
         }
+
         public User(int ID)
         {
             this.ID = ID;
         }
 
+        #region Validate
+        //Check for empty or invalid fields
         internal bool Validate()
         {
             bool canSave = true;
@@ -62,11 +60,13 @@ namespace EcobitStage.ViewModel.DataViewModel
             else if (Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
                 canSave = true;
-            } else{
+            }
+            else
+            {
                 UserFeedback += "\r\n Het veld `Email` is niet valide.";
                 canSave = false;
             }
-           
+
             if (UserFeedback.Length != 0)
             {
                 string substringUserFeedback = UserFeedback.Substring(2);
@@ -75,6 +75,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             RaisePropertyChanged(() => UserFeedback);
             return canSave;
         }
+
         internal bool ValidateUserPrivilege()
         {
             bool canSave = true;
@@ -84,7 +85,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 UserFeedback += "\r\n Het veld `Gebruiker` is vereist.";
                 canSave = false;
-            }    
+            }
             if (UserFeedback.Length != 0)
             {
                 string substringUserFeedback = UserFeedback.Substring(2);
@@ -93,6 +94,9 @@ namespace EcobitStage.ViewModel.DataViewModel
             RaisePropertyChanged(() => UserFeedback);
             return canSave;
         }
+
+        #endregion
+
         public DTO ConvertToDTO()
         {
             return new UserDTO(ID, FirstName, LastName, Email);

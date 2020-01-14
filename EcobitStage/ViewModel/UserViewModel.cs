@@ -11,6 +11,8 @@ namespace EcobitStage.ViewModel
 {
     public class UserViewModel : ViewModelBase
     {
+        #region Commands
+
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -18,6 +20,9 @@ namespace EcobitStage.ViewModel
         public ICommand NewCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+
+        #endregion Commands
+
         private string _searchQuery;
 
         public string SearchQuery
@@ -42,6 +47,7 @@ namespace EcobitStage.ViewModel
             Initialize();
         }
 
+        //Initialize... create Commandfunctions
         private void Initialize()
         {
             SelectedUser = null;
@@ -55,6 +61,7 @@ namespace EcobitStage.ViewModel
             Refresh();
         }
 
+        //Search function, where name contains search query.
         private void Search()
         {
             var query = SearchQuery.ToLower();
@@ -65,6 +72,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Add UserPrivilege (Button)
         private void New()
         {
             SelectedUser = new DataViewModel.User(-1);
@@ -76,18 +84,22 @@ namespace EcobitStage.ViewModel
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserEditView();
         }
 
+        //Cancel, escape
         private void Cancel()
         {
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserListView();
         }
 
+        //Save newly created User
         private void Save()
         {
+            //Validate
             if (SelectedUser.Validate())
             {
                 Ecobit.Domain.User addUser = new Ecobit.Domain.User { ID = SelectedUser.ID, FirstName = SelectedUser.FirstName, LastName = SelectedUser.LastName, E_mail = SelectedUser.Email };
                 using (var context = new EcobitDBEntities())
                 {
+                    //User already exists
                     var existingUser = context.User.Where(u => u.E_mail.Equals(addUser.E_mail));
                     if (existingUser.Count() != 0)
                     {
@@ -105,6 +117,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Simple delete function
         private void Delete()
         {
             if (MessageBox.Show("Wil je deze gebruiker verwijderen?",
@@ -125,6 +138,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Refresh User list
         private void Refresh()
         {
             _users.Clear();

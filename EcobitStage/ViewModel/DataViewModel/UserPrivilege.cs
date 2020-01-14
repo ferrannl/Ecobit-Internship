@@ -1,11 +1,6 @@
 ﻿using EcobitStage.DataTransfer;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EcobitStage.ViewModel.DataViewModel
 {
@@ -22,7 +17,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public bool IsOverDate { get; set; }
         public bool IsAlmostOverDate { get; set; }
         public bool IsNotOverDate { get; set; }
-                
+
         public UserPrivilege(UserPrivilegeDTO DTO)
         {
             User_ID = DTO.User_ID;
@@ -30,10 +25,12 @@ namespace EcobitStage.ViewModel.DataViewModel
             StartDate = DTO.StartDate;
             EndDate = DTO.EndDate;
         }
+
         public UserPrivilege(int User_ID, string Privilege_Name, DateTime StartDate, DateTime EndDate)
         {
             this.User_ID = User_ID;
             this.Privilege_Name = Privilege_Name;
+            //Setting startdate to today for convience
             if (StartDate.Year >= 1000)
             {
                 this._StartDate = ConvertDate(StartDate);
@@ -52,6 +49,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             }
             OverDate();
         }
+
         public UserPrivilege()
         {
             if (StartDate.Year >= 1000)
@@ -78,7 +76,9 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 IsAlmostOverDate = false;
                 IsOverDate = true;
-            } if(Convert.ToDateTime(_EndDate) >= DateTime.Today.AddDays(7)){
+            }
+            if (Convert.ToDateTime(_EndDate) >= DateTime.Today.AddDays(7))
+            {
                 IsNotOverDate = true;
                 IsAlmostOverDate = false;
                 IsOverDate = false;
@@ -86,7 +86,9 @@ namespace EcobitStage.ViewModel.DataViewModel
             return;
         }
 
-        internal bool Validate()
+        #region Validate
+        //Check for empty or invalid fields
+                internal bool Validate()
         {
             bool canSave = true;
             UserFeedback = "";
@@ -110,6 +112,8 @@ namespace EcobitStage.ViewModel.DataViewModel
             return canSave;
         }
 
+        #endregion
+
         public string ConvertDate(DateTime date)
         {
             string newDate = date.ToString("dd-MM-yyyy");
@@ -118,7 +122,7 @@ namespace EcobitStage.ViewModel.DataViewModel
 
         public DTO ConvertToDTO()
         {
-            return new UserPrivilegeDTO(User_ID, Privilege_Name, StartDate, EndDate );
+            return new UserPrivilegeDTO(User_ID, Privilege_Name, StartDate, EndDate);
         }
     }
 }

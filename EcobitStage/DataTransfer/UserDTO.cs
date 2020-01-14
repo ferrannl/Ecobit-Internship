@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EcobitStage.DataTransfer
+﻿namespace EcobitStage.DataTransfer
 {
     public class UserDTO : DTO
     {
@@ -15,10 +9,10 @@ namespace EcobitStage.DataTransfer
             this.LastName = LastName;
             this.Email = Email;
         }
+
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-
     }
 }

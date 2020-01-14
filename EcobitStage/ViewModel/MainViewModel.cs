@@ -1,24 +1,20 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        //public static string baseUrl = "https://ecobit_iets.azurewebsites.net/";
-
-        public static string baseUrl = "http://localhost:54109/";
+        //public static string baseUrl = "http://localhost:54109/";
 
         #region properties & fields
 
         private Uri _currentPage;
+
         [System.ComponentModel.Bindable(true)]
+        //Get Set for current showing page
         public Uri CurrentPage
         {
             get { return _currentPage; }
@@ -28,18 +24,21 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("CurrentPage");
             }
         }
+
         public ViewUriFactory factory { get; set; }
         public AccountViewModel Account { get; set; }
         public string TopText { get; set; }
 
         //Menubar Commands and CanExecutes.
         public ICommand UserPrivilegeList { get; set; }
+
         public ICommand PrivilegeList { get; set; }
         public ICommand UserList { get; set; }
         public ICommand Logout { get; set; }
 
-        #endregion
+        #endregion properties & fields
 
+        //Initializing MainViewModel
         public MainViewModel()
         {
             factory = new ViewUriFactory();
@@ -50,6 +49,7 @@ namespace EcobitStage.ViewModel
             Logout = new RelayCommand(OpenLogout);
         }
 
+        //After succesful login
         public void Login(AccountViewModel account)
         {
             Account = account;
@@ -59,10 +59,13 @@ namespace EcobitStage.ViewModel
             UpdateAcces();
         }
 
+        #region OpenViews
+
         public void OpenUserPrivilegeListView()
         {
             CurrentPage = factory.GetUri("UserPrivilegeListView");
         }
+
         public void OpenPrivilegeListView()
         {
             CurrentPage = factory.GetUri("PrivilegeListView");
@@ -77,14 +80,17 @@ namespace EcobitStage.ViewModel
         {
             CurrentPage = factory.GetUri("UserEditView");
         }
+
         public void OpenPrivilegeEditView()
         {
             CurrentPage = factory.GetUri("PrivilegeEditView");
         }
+
         public void OpenUserPrivilegeEditView()
         {
             CurrentPage = factory.GetUri("UserPrivilegeEditView");
         }
+
         public void OpenChangePasswordView()
         {
             CurrentPage = factory.GetUri("ChangePasswordView");
@@ -98,6 +104,10 @@ namespace EcobitStage.ViewModel
             CurrentPage = factory.GetUri("LoginView");
             UpdateAcces();
         }
+
+        #endregion OpenViews
+
+        #region MainButtonsAccesability
 
         public void UpdateAcces()
         {
@@ -118,6 +128,7 @@ namespace EcobitStage.ViewModel
                 return false;
             }
         }
+
         public bool CanAccessUserListView
         {
             get
@@ -129,6 +140,7 @@ namespace EcobitStage.ViewModel
                 return false;
             }
         }
+
         public bool CanAccessPrivilegeListView
         {
             get
@@ -140,6 +152,7 @@ namespace EcobitStage.ViewModel
                 return false;
             }
         }
+
         public bool CanLogout
         {
             get
@@ -151,5 +164,7 @@ namespace EcobitStage.ViewModel
                 return false;
             }
         }
+
+        #endregion MainButtonsAccesability
     }
 }

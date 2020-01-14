@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EcobitStage.DataTransfer
+﻿namespace EcobitStage.DataTransfer
 {
     public class AccountDTO : DTO
     {
         public AccountDTO()
         {
-
         }
 
         public AccountDTO(int ID, string Name, string Username, string Password, string Role)

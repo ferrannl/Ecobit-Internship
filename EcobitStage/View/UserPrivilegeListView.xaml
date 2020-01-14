@@ -45,7 +45,10 @@
             </Grid>
             <StackPanel>
                 <DockPanel Margin="0,5">
-                    <TextBox MinWidth="150" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox
+                        MinWidth="150"
+                        VerticalContentAlignment="Center"
+                        Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Return" Command="{Binding SearchCommand}" />
                             <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
@@ -61,12 +64,15 @@
                         Width="20"
                         Height="20"
                         Margin="5,0"
-                        HorizontalAlignment="Left"
-                        Background="Purple"
+                        Background="Transparent"
                         BorderBrush="Transparent"
-                        Command="{Binding RefreshCommand}"
-                        Content="⭯"
-                        Foreground="White" />
+                        Command="{Binding RefreshCommand}">
+                        <Image
+                            Margin="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="/View/Repo/Remove_Filter_Black.png" />
+                    </Button>
                     <StackPanel
                         Margin="0,0,60,0"
                         HorizontalAlignment="Right"
@@ -75,30 +81,28 @@
                         <Button
                             Width="20"
                             Height="20"
-                            HorizontalAlignment="Left"
                             Background="Green"
-                            BorderBrush="Transparent"
-                            Command="{Binding IsNotOverDateCommand}"
-                            Content="🔍"
-                            Foreground="White" />
+                            BorderBrush="Green"
+                            Command="{Binding IsNotOverDateCommand}">
+                            <Image Source="/View/Repo/Filter_White.png" />
+                        </Button>
                         <Button
                             Width="20"
                             Height="20"
-                            HorizontalAlignment="Left"
+                            Margin="4,0,4,0"
                             Background="Orange"
-                            BorderBrush="Transparent"
-                            Command="{Binding IsAlmostOverDateCommand}"
-                            Content="🔍"
-                            Foreground="White" />
+                            BorderBrush="Orange"
+                            Command="{Binding IsAlmostOverDateCommand}">
+                            <Image Source="/View/Repo/Filter_White.png" />
+                        </Button>
                         <Button
                             Width="20"
                             Height="20"
-                            HorizontalAlignment="Left"
                             Background="Red"
-                            BorderBrush="Transparent"
-                            Command="{Binding IsOverDateCommand}"
-                            Content="🔍"
-                            Foreground="White" />
+                            BorderBrush="Red"
+                            Command="{Binding IsOverDateCommand}">
+                            <Image Source="/View/Repo/Filter_White.png" />
+                        </Button>
                     </StackPanel>
                 </DockPanel>
                 <DataGrid
