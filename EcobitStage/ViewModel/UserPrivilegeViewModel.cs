@@ -105,6 +105,7 @@ namespace EcobitStage.ViewModel
         private void Edit()
         {
             //Removed refresh to fix bug in Save();
+            Refresh();
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
         }
 
