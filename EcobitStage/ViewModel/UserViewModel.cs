@@ -66,7 +66,7 @@ namespace EcobitStage.ViewModel
         {
             var query = SearchQuery.ToLower();
             ObservableUsers.Clear();
-            foreach (DataViewModel.User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.ID.ToString() == query || us.FirstName.ToLower().Contains(query)))
+            foreach (DataViewModel.User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.FullName.ToLower().Contains(query) || us.LastName.ToLower().Contains(query) || us.Email.ToLower().Contains(query)))
             {
                 ObservableUsers.Add(u);
             }

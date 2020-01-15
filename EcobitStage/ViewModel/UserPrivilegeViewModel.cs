@@ -85,7 +85,7 @@ namespace EcobitStage.ViewModel
         {
             var query = SearchQuery.ToLower();
             ObservableUserPrivileges.Clear();
-            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Fullname.ToString() == query || up.Fullname.ToLower().Contains(query)))
+            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) ||  up.Privilege_Name.ToLower().Contains(query)))
             {
                 ObservableUserPrivileges.Add(up);
             }

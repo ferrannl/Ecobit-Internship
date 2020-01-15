@@ -11,7 +11,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string LastName { get; set; }
         public string Email { get; set; }
         public string UserFeedback { get; set; }
-
+        public string FullName { get; set; }
         public User(UserDTO DTO)
         {
             ID = DTO.ID;
@@ -26,6 +26,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Email = Email;
+            this.FullName = $"{FirstName} {LastName}";
         }
 
         public User(int ID)
