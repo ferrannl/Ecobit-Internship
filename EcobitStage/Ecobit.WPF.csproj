@@ -105,6 +105,7 @@
     <Compile Include="DataTransfer\PrivilegeDTO.cs" />
     <Compile Include="DataTransfer\UserDTO.cs" />
     <Compile Include="DataTransfer\UserPrivilegeDTO.cs" />
+    <Compile Include="Sources\MessageBoxManager.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\DataViewModel\ITransfer.cs" />

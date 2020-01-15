@@ -45,10 +45,9 @@
                                 IsEditable="True"
                                 IsTextSearchEnabled="False"
                                 ItemsSource="{Binding ObservableUsers}"
-                                SelectedItem="{Binding SelectedUser}"
-                                SelectedValuePath="FirstName"
+                                SelectedValuePath="Email"
                                 TabIndex="0"
-                                Text="{Binding SelectedUser.Email}" />
+                                Text="{Binding SelectedUser.SelectedEmail}" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">
@@ -79,10 +78,9 @@
                                 IsEditable="True"
                                 IsTextSearchEnabled="False"
                                 ItemsSource="{Binding ObservablePrivileges}"
-                                SelectedItem="{Binding SelectedPrivilege}"
                                 SelectedValuePath="Name"
                                 TabIndex="1"
-                                Text="{Binding SelectedPrivilege.Name}" />
+                                Text="{Binding SelectedPrivilege.SelectedName}" />
                         </StackPanel>
 
                         <StackPanel Margin="0,5,0,0" Orientation="Vertical">

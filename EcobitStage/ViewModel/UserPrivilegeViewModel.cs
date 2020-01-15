@@ -64,7 +64,6 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = null;
             SelectedPrivilege = null;
-            SelectedUserPrivilege = null;
             ObservableUsers = new ObservableCollection<DataViewModel.User>();
             ObservablePrivileges = new ObservableCollection<DataViewModel.Privilege>();
             ObservableUserPrivileges = new ObservableCollection<DataViewModel.UserPrivilege>();
@@ -85,7 +84,7 @@ namespace EcobitStage.ViewModel
         {
             var query = SearchQuery.ToLower();
             ObservableUserPrivileges.Clear();
-            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) ||  up.Privilege_Name.ToLower().Contains(query)))
+            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Privilege_Name.ToLower().Contains(query)))
             {
                 ObservableUserPrivileges.Add(up);
             }
@@ -96,7 +95,6 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = new DataViewModel.User(-1);
             SelectedPrivilege = new DataViewModel.Privilege();
-            SelectedUserPrivilege = null;
             SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             Edit();
         }
@@ -123,32 +121,42 @@ namespace EcobitStage.ViewModel
 
             //Validate all fields
             bool saved = true;
-            if (SelectedUser.ValidateUserPrivilege() && SelectedPrivilege.Validate() && SelectedUserPrivilege.Validate())
+            if (SelectedUser.ValidateUserPrivilege() && SelectedPrivilege.ValidateUserPrivilege() && SelectedUserPrivilege.Validate())
             {
                 Ecobit.Domain.UserPrivilege addUserPrivilege = new Ecobit.Domain.UserPrivilege { User_ID = SelectedUser.ID, Privilege_Name = SelectedPrivilege.Name, StartDate = SelectedUserPrivilege.StartDate, EndDate = SelectedUserPrivilege.EndDate };
                 using (var context = new EcobitDBEntities())
                 {
-                    List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                    List<Ecobit.Domain.UserPrivilege> listuserprivileges = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
                     List<Ecobit.Domain.Privilege> listprivileges = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
+                    List<Ecobit.Domain.Privilege> listusers = new List<Ecobit.Domain.Privilege>(context.Privilege.ToList());
 
-                    //Check if Privilege exists
-                    var existingUser = context.User.Where(u => u.E_mail.Equals(SelectedUser.Email));
+                    var existingUser = context.User.Where(u => u.E_mail.Equals(SelectedUser.SelectedEmail));
                     if (existingUser.Count() == 0)
-                    {
+                    {                    
+                        //Check if User exists
                         saved = false;
-                        MessageBox.Show("Gebruiker " + SelectedUser.Email + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
+                        MessageBox.Show("Gebruiker " + SelectedUser.SelectedEmail + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
                         return;
                     }
-                    //Check if User exists
-                    var existingPrivilege = context.Privilege.Where(s => s.Name.Equals(SelectedPrivilege.Name));
+                    else
+                    {
+                        addUserPrivilege.User_ID = existingUser.SingleOrDefault().ID;
+                    }
+
+                    //Check if Privilege exists
+                    var existingPrivilege = context.Privilege.Where(s => s.Name.ToLower().Equals(SelectedPrivilege.SelectedName.ToLower()));
                     if (existingPrivilege.Count() == 0)
                     {
                         saved = false;
-                        MessageBox.Show("Toegankelijkheid " + SelectedPrivilege.Name + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
+                        MessageBox.Show("Toegankelijkheid " + SelectedPrivilege.SelectedName + " bestaat niet.", "Bestaat niet", MessageBoxButton.OK);
                         return;
                     }
+                    else
+                    {
+                        addUserPrivilege.Privilege_Name = existingPrivilege.SingleOrDefault().Name;
+                    }
                     //Check if combination User and Privilege exists
-                    foreach (Ecobit.Domain.UserPrivilege up in list)
+                    foreach (Ecobit.Domain.UserPrivilege up in listuserprivileges)
                     {
                         if (up.Privilege_Name.ToLower() == SelectedPrivilege.Name.ToLower() && up.User_ID == SelectedUser.ID)
                         {

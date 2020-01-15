@@ -12,6 +12,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string Email { get; set; }
         public string UserFeedback { get; set; }
         public string FullName { get; set; }
+        public string SelectedEmail { get; set; }
         public User(UserDTO DTO)
         {
             ID = DTO.ID;
@@ -99,7 +100,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             bool canSave = true;
             UserFeedback = "";
 
-            if (string.IsNullOrWhiteSpace(Email))
+            if (string.IsNullOrWhiteSpace(SelectedEmail))
             {
                 UserFeedback += "\r\n Het veld `Gebruiker` is vereist.";
                 canSave = false;

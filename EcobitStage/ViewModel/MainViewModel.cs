@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
@@ -25,7 +26,8 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        public ViewUriFactory factory { get; set; }
+        public MessageBoxManager MessageBoxManager { get; set; }
+        public ViewUriFactory Factory { get; set; }
         public AccountViewModel Account { get; set; }
         public string TopText { get; set; }
 
@@ -41,12 +43,19 @@ namespace EcobitStage.ViewModel
         //Initializing MainViewModel
         public MainViewModel()
         {
-            factory = new ViewUriFactory();
-            CurrentPage = factory.GetUri("LoginView");
+            MessageBoxManager = new MessageBoxManager();
+            MessageBoxManager.OK = "OK";
+            MessageBoxManager.Yes = "Ja";
+            MessageBoxManager.No = "Nee";
+            MessageBoxManager.Cancel = "Annuleren";
+            MessageBoxManager.Register();
+            Factory = new ViewUriFactory();
+            CurrentPage = Factory.GetUri("LoginView");
             UserPrivilegeList = new RelayCommand(OpenUserPrivilegeListView, CanAccessUserPrivilegeListView);
             UserList = new RelayCommand(OpenUserListView, CanAccessUserListView);
             PrivilegeList = new RelayCommand(OpenPrivilegeListView, CanAccessPrivilegeListView);
             Logout = new RelayCommand(OpenLogout);
+
         }
 
         //After succesful login
@@ -63,37 +72,37 @@ namespace EcobitStage.ViewModel
 
         public void OpenUserPrivilegeListView()
         {
-            CurrentPage = factory.GetUri("UserPrivilegeListView");
+            CurrentPage = Factory.GetUri("UserPrivilegeListView");
         }
 
         public void OpenPrivilegeListView()
         {
-            CurrentPage = factory.GetUri("PrivilegeListView");
+            CurrentPage = Factory.GetUri("PrivilegeListView");
         }
 
         public void OpenUserListView()
         {
-            CurrentPage = factory.GetUri("UserListView");
+            CurrentPage = Factory.GetUri("UserListView");
         }
 
         public void OpenUserEditView()
         {
-            CurrentPage = factory.GetUri("UserEditView");
+            CurrentPage = Factory.GetUri("UserEditView");
         }
 
         public void OpenPrivilegeEditView()
         {
-            CurrentPage = factory.GetUri("PrivilegeEditView");
+            CurrentPage = Factory.GetUri("PrivilegeEditView");
         }
 
         public void OpenUserPrivilegeEditView()
         {
-            CurrentPage = factory.GetUri("UserPrivilegeEditView");
+            CurrentPage = Factory.GetUri("UserPrivilegeEditView");
         }
 
         public void OpenChangePasswordView()
         {
-            CurrentPage = factory.GetUri("ChangePasswordView");
+            CurrentPage = Factory.GetUri("ChangePasswordView");
         }
 
         public void OpenLogout()
@@ -101,7 +110,7 @@ namespace EcobitStage.ViewModel
             Account = null;
             TopText = "Inloggen";
             RaisePropertyChanged("TopText");
-            CurrentPage = factory.GetUri("LoginView");
+            CurrentPage = Factory.GetUri("LoginView");
             UpdateAcces();
         }
 

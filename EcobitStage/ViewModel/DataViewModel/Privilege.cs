@@ -8,6 +8,7 @@ namespace EcobitStage.ViewModel.DataViewModel
     {
         public string Name { get; set; }
         public string UserFeedback { get; set; }
+        public string SelectedName { get; set; }
 
         public Privilege(PrivilegeDTO DTO)
         {
@@ -34,7 +35,39 @@ namespace EcobitStage.ViewModel.DataViewModel
             {
                 UserFeedback += "\r\n Het veld `Toegankelijkheid` is vereist.";
                 canSave = false;
-            } else if (Regex.IsMatch(Name, @"[a-zA-Z]")) {
+            }
+            else if (Regex.IsMatch(Name, @"[a-zA-Z]"))
+            {
+                canSave = true;
+            }
+            else
+            {
+                UserFeedback += "\r\n Het veld `Naam` is niet valide.";
+            }
+
+            if (UserFeedback.Length != 0)
+            {
+                string substringUserFeedback = UserFeedback.Substring(2);
+                UserFeedback = substringUserFeedback;
+            }
+            RaisePropertyChanged(() => UserFeedback);
+
+            return canSave;
+        }
+
+        internal bool ValidateUserPrivilege()
+        {
+
+            bool canSave = true;
+            UserFeedback = "";
+
+            if (string.IsNullOrWhiteSpace(SelectedName))
+            {
+                UserFeedback += "\r\n Het veld `Toegankelijkheid` is vereist.";
+                canSave = false;
+            }
+            else if (Regex.IsMatch(SelectedName, @"[a-zA-Z]"))
+            {
                 canSave = true;
             }
             else
