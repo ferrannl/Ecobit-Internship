@@ -120,11 +120,20 @@ namespace EcobitStage.ViewModel
         //Simple delete function
         private void Delete()
         {
-            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " en zijn of haar Gebruikers Toegankelijkheden verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())
                 {
+                    //Delete UserPrivileges from the selected user
+                    List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                    foreach (UserPrivilege ups in list)
+                    {
+                        var userprivilege = context.UserPrivilege.Where(up => up.User_ID == SelectedUser.ID).FirstOrDefault();
+                        context.UserPrivilege.Remove(userprivilege);
+                    }
+
+                    //Delete actual user
                     var user = context.User.Where(u => u.ID == SelectedUser.ID).FirstOrDefault();
                     context.User.Remove(user);
                     context.SaveChanges();
