@@ -17,6 +17,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         public bool IsOverDate { get; set; }
         public bool IsAlmostOverDate { get; set; }
         public bool IsNotOverDate { get; set; }
+        public string Email { get; set; }
 
         public UserPrivilege(UserPrivilegeDTO DTO)
         {
@@ -89,7 +90,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         #region Validate
 
         //Check for empty or invalid fields
-                internal bool Validate()
+        internal bool Validate()
         {
             bool canSave = true;
             UserFeedback = "";

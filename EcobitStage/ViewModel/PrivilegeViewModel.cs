@@ -98,7 +98,7 @@ namespace EcobitStage.ViewModel
                     {
                         if (p.Name.ToLower() == SelectedPrivilege.Name.ToLower())
                         {
-                            MessageBox.Show(SelectedPrivilege.Name + " bestaat al.",
+                            MessageBox.Show(p.Name + " bestaat al.",
                                 "Bestaat al", MessageBoxButton.OK);
                             saved = false;
                         }
