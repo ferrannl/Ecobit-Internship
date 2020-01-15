@@ -13,13 +13,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string UserFeedback { get; set; }
         public string FullName { get; set; }
         public string SelectedEmail { get; set; }
-        public User(UserDTO DTO)
-        {
-            ID = DTO.ID;
-            FirstName = DTO.FirstName;
-            LastName = DTO.LastName;
-            Email = DTO.Email;
-        }
 
         public User(int ID, string FirstName, string LastName, string Email)
         {

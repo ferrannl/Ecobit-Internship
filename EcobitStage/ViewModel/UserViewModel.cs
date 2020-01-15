@@ -124,10 +124,10 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        //Simple delete function
+        //delete function
         private void Delete()
         {
-            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " en bijbehorende Gebruikers Toegankelijkheden verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " en bijbehorende Toegankelijkheden verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())
@@ -137,7 +137,10 @@ namespace EcobitStage.ViewModel
                     foreach (UserPrivilege ups in list)
                     {
                         var userprivilege = context.UserPrivilege.Where(up => up.User_ID == SelectedUser.ID).FirstOrDefault();
-                        context.UserPrivilege.Remove(userprivilege);
+                        if (userprivilege != null)
+                        {
+                            context.UserPrivilege.Remove(userprivilege);
+                        }
                     }
 
                     //Delete actual user

@@ -66,13 +66,23 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Command="{Binding RefreshCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <Image
                             Width="24"
                             Height="24"
                             Margin="0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Source="/View/Repo/Remove_Filter_Black.png" />
+                            Source="/View/Repo/Remove_Filter_Black_WB.png" />
                     </Button>
                 </DockPanel>
                 <DataGrid
@@ -108,7 +118,8 @@
                                         Height="26"
                                         HorizontalAlignment="Right"
                                         Background="Crimson"
-                                        BorderBrush="Transparent"
+                                        BorderBrush="Crimson"
+                                        BorderThickness="0"
                                         Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         Content="❌"
                                         FontSize="15"

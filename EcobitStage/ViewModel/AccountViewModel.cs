@@ -19,16 +19,5 @@ namespace EcobitStage.ViewModel
             this.Password = account.Password;
             this.Role = account.Role;
         }
-
-        public AccountViewModel()
-        {
-            ID = -1;
-        }
-
-        public AccountDTO ToAccountDTO()
-        {
-            AccountDTO dto = new AccountDTO(ID, Name, Username, Password, Role);
-            return dto;
-        }
     }
 }

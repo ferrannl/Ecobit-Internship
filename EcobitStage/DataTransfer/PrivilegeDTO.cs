@@ -2,10 +2,6 @@
 {
     public class PrivilegeDTO : DTO
     {
-        public PrivilegeDTO()
-        {
-        }
-
         public PrivilegeDTO(string Name)
         {
             this.Name = Name;

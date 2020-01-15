@@ -4,10 +4,6 @@ namespace EcobitStage.DataTransfer
 {
     public class UserPrivilegeDTO : DTO
     {
-        public UserPrivilegeDTO()
-        {
-        }
-
         public UserPrivilegeDTO(int User_ID, string Privilege_Name, DateTime StartDate, DateTime EndDate)
         {
             this.User_ID = User_ID;

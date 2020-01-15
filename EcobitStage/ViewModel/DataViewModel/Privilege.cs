@@ -10,11 +10,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         public string UserFeedback { get; set; }
         public string SelectedName { get; set; }
 
-        public Privilege(PrivilegeDTO DTO)
-        {
-            Name = DTO.Name;
-        }
-
         public Privilege(string Name)
         {
             this.Name = Name;

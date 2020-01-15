@@ -19,14 +19,6 @@ namespace EcobitStage.ViewModel.DataViewModel
         public bool IsNotOverDate { get; set; }
         public string Email { get; set; }
 
-        public UserPrivilege(UserPrivilegeDTO DTO)
-        {
-            User_ID = DTO.User_ID;
-            Privilege_Name = DTO.Privilege_Name;
-            StartDate = DTO.StartDate;
-            EndDate = DTO.EndDate;
-        }
-
         public UserPrivilege(int User_ID, string Privilege_Name, DateTime StartDate, DateTime EndDate)
         {
             this.User_ID = User_ID;
@@ -64,6 +56,7 @@ namespace EcobitStage.ViewModel.DataViewModel
             OverDate();
         }
 
+        //Check when privilege expires
         public void OverDate()
         {
             IsOverDate = false;
