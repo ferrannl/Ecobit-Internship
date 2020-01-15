@@ -84,7 +84,7 @@ namespace EcobitStage.ViewModel
         {
             var query = SearchQuery.ToLower();
             ObservableUserPrivileges.Clear();
-            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Privilege_Name.ToLower().Contains(query)))
+            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Privilege_Name.ToLower().Contains(query) ||up.Email.ToLower().Contains(query)))
             {
                 ObservableUserPrivileges.Add(up);
             }
@@ -203,7 +203,7 @@ namespace EcobitStage.ViewModel
             }
         }
 
-        //Get and create fullname from User ID.
+        //Get and create fullname using User ID.
         public string GetFullnameByID(int id)
         {
             string fullname = null;
@@ -224,6 +224,27 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //Get and set email using User ID
+        public string GetEmailByID(int id)
+        {
+            string email = null;
+            using (var context = new EcobitDBEntities())
+            {
+                List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+
+                var user = context.User.FirstOrDefault(i => i.ID == id);
+                email = user.E_mail;
+            }
+            if (email != null)
+            {
+                return email;
+            }
+            else
+            {
+                return "geen_email";
+            }
+        }
+
         //Refresh all lists
         private void Refresh()
         {
@@ -236,6 +257,7 @@ namespace EcobitStage.ViewModel
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.Email = GetEmailByID(newUP.User_ID);
                     newUP.OverDate();
                     _userprivileges.Add(newUP);
                     ObservableUserPrivileges.Add(newUP);
@@ -291,6 +313,7 @@ namespace EcobitStage.ViewModel
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.Email = GetEmailByID(newUP.User_ID);
                     newUP.OverDate();
                     if (newUP.IsOverDate)
                     {
@@ -314,6 +337,7 @@ namespace EcobitStage.ViewModel
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.Email = GetEmailByID(newUP.User_ID);
                     newUP.OverDate();
                     if (newUP.IsAlmostOverDate)
                     {
@@ -337,6 +361,7 @@ namespace EcobitStage.ViewModel
                 {
                     DataViewModel.UserPrivilege newUP = new DataViewModel.UserPrivilege(up.User_ID, up.Privilege_Name, up.StartDate, up.EndDate);
                     newUP.Fullname = GetFullnameByID(newUP.User_ID);
+                    newUP.Email = GetEmailByID(newUP.User_ID);
                     newUP.OverDate();
                     if (newUP.IsNotOverDate)
                     {

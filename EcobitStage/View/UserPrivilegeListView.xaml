@@ -127,6 +127,10 @@
                             Header="Gebruiker" />
                         <DataGridTextColumn
                             Width="120*"
+                            Binding="{Binding Email}"
+                            Header="Email" />
+                        <DataGridTextColumn
+                            Width="120*"
                             Binding="{Binding Privilege_Name}"
                             Header="Toegankelijkheid" />
                         <DataGridTextColumn

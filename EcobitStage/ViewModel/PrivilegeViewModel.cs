@@ -116,11 +116,19 @@ namespace EcobitStage.ViewModel
 
         private void Delete()
         {
-            if (MessageBox.Show("Wil je " + SelectedPrivilege.Name + " verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedPrivilege.Name + " en bijbehorende Gebruiker Toegankelijkheden verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())
                 {
+                    //Delete UserPrivileges from the selected privilege
+                    List<Ecobit.Domain.UserPrivilege> list = new List<Ecobit.Domain.UserPrivilege>(context.UserPrivilege.ToList());
+                    foreach (UserPrivilege ups in list)
+                    {
+                        var userprivilege = context.UserPrivilege.Where(up => up.Privilege_Name == SelectedPrivilege.Name).FirstOrDefault();
+                        context.UserPrivilege.Remove(userprivilege);
+                    }
+
                     var privilege = context.Privilege.Where(p => p.Name == SelectedPrivilege.Name).FirstOrDefault();
                     context.Privilege.Remove(privilege);
                     context.SaveChanges();
