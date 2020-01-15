@@ -95,7 +95,6 @@ namespace EcobitStage.ViewModel
         {
             SelectedUser = new DataViewModel.User(-1);
             SelectedPrivilege = new DataViewModel.Privilege();
-            SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             Edit();
         }
 
@@ -104,6 +103,7 @@ namespace EcobitStage.ViewModel
         {
             //Removed refresh to fix bug in Save();
             Refresh();
+            SelectedUserPrivilege = new DataViewModel.UserPrivilege();
             CommonServiceLocator.ServiceLocator.Current.GetInstance<MainViewModel>().OpenUserPrivilegeEditView();
         }
 
@@ -141,6 +141,8 @@ namespace EcobitStage.ViewModel
                     else
                     {
                         addUserPrivilege.User_ID = existingUser.SingleOrDefault().ID;
+                        SelectedUser.FirstName = existingUser.SingleOrDefault().FirstName;
+
                     }
 
                     //Check if Privilege exists
@@ -154,15 +156,19 @@ namespace EcobitStage.ViewModel
                     else
                     {
                         addUserPrivilege.Privilege_Name = existingPrivilege.SingleOrDefault().Name;
+                        SelectedPrivilege.Name = existingPrivilege.SingleOrDefault().Name;
+
                     }
                     //Check if combination User and Privilege exists
                     foreach (Ecobit.Domain.UserPrivilege up in listuserprivileges)
                     {
-                        if (up.Privilege_Name.ToLower() == SelectedPrivilege.Name.ToLower() && up.User_ID == SelectedUser.ID)
+                        if (up.Privilege_Name.ToLower() == addUserPrivilege.Privilege_Name.ToLower() && up.User_ID == addUserPrivilege.User_ID)
                         {
                             MessageBox.Show("Combinatie " + SelectedUser.FirstName + " - " + SelectedPrivilege.Name + " bestaat al.",
                                 "Combinatie bestaat al", MessageBoxButton.OK);
                             saved = false;
+                            //Break in case dupes occur
+                            break;
                         }
                     }
                     if (saved == true)
