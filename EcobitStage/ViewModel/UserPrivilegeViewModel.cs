@@ -82,11 +82,18 @@ namespace EcobitStage.ViewModel
         //Search function
         private void Search()
         {
-            var query = SearchQuery.ToLower();
-            ObservableUserPrivileges.Clear();
-            foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Privilege_Name.ToLower().Contains(query) ||up.Email.ToLower().Contains(query)))
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
-                ObservableUserPrivileges.Add(up);
+                var query = SearchQuery.ToLower();
+                ObservableUserPrivileges.Clear();
+                foreach (DataViewModel.UserPrivilege up in _userprivileges.Where(up => up.Fullname.ToLower().Contains(query) || up.Privilege_Name.ToLower().Contains(query) || up.Email.ToLower().Contains(query)))
+                {
+                    ObservableUserPrivileges.Add(up);
+                }
+            }
+            else
+            {
+                Refresh();
             }
         }
 

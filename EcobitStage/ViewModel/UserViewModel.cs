@@ -64,11 +64,18 @@ namespace EcobitStage.ViewModel
         //Search function, where name contains search query.
         private void Search()
         {
-            var query = SearchQuery.ToLower();
-            ObservableUsers.Clear();
-            foreach (DataViewModel.User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.FullName.ToLower().Contains(query) || us.LastName.ToLower().Contains(query) || us.Email.ToLower().Contains(query)))
+            if (!string.IsNullOrWhiteSpace(SearchQuery))
             {
-                ObservableUsers.Add(u);
+                var query = SearchQuery.ToLower();
+                ObservableUsers.Clear();
+                foreach (DataViewModel.User u in _users.Where(us => us.FirstName.ToLower().Contains(query) || us.FullName.ToLower().Contains(query) || us.LastName.ToLower().Contains(query) || us.Email.ToLower().Contains(query)))
+                {
+                    ObservableUsers.Add(u);
+                }
+            }
+            else
+            {
+                Refresh();
             }
         }
 
