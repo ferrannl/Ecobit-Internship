@@ -1,11 +1,13 @@
 ﻿using Ecobit.Domain;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
@@ -24,51 +26,9 @@ namespace EcobitStage.ViewModel
         public ICommand IsOverDateCommand { get; set; }
         public ICommand IsAlmostOverDateCommand { get; set; }
         public ICommand IsNotOverDateCommand { get; set; }
-
+        public ICommand SelectedDateCommand { get; set; }
         #endregion Commands
 
-        private string _searchQuery;
-
-        public string SearchQuery
-        {
-            get
-            {
-                return _searchQuery;
-            }
-            set
-            {
-                _searchQuery = value;
-                RaisePropertyChanged("SearchQuery");
-            }
-        }
-
-        //private string _refreshdeletion;
-        //public string RefreshDeletion
-        //{
-        //    get
-        //    {
-        //        if (string.IsNullOrEmpty(_refreshdeletion))
-        //            return "Unknown";
-
-        //        return _refreshdeletion;
-        //    }
-        //    set
-        //    {
-        //        _refreshdeletion = value;
-        //        OnPropertyRaised("RefreshDeletion");
-        //    }
-        //}
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //private void OnPropertyRaised(string RefreshDeletion)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        Refresh();
-        //    }
-        //}
-               
         private List<DataViewModel.User> _users = new List<DataViewModel.User>();
         private List<DataViewModel.Privilege> _privileges = new List<DataViewModel.Privilege>();
         private List<DataViewModel.UserPrivilege> _userprivileges = new List<DataViewModel.UserPrivilege>();
@@ -86,6 +46,20 @@ namespace EcobitStage.ViewModel
             Initialize();
         }
 
+        private string _searchQuery;
+
+        public string SearchQuery
+        {
+            get
+            {
+                return _searchQuery;
+            }
+            set
+            {
+                _searchQuery = value;
+                RaisePropertyChanged("SearchQuery");
+            }
+        }
         //Initialize... create Commandfunctions
         private void Initialize()
         {
@@ -122,6 +96,10 @@ namespace EcobitStage.ViewModel
             {
                 Refresh();
             }
+        }
+        public void LoseFocus()
+        {
+            Mouse.Capture(null);
         }
 
         //Create new UserPrivilege
