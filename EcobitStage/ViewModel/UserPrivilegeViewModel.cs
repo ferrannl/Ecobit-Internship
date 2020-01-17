@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
-    public class UserPrivilegeViewModel : ViewModelBase, INotifyPropertyChanged
+    public class UserPrivilegeViewModel : ViewModelBase
     {
         #region Commands
 
@@ -42,6 +42,33 @@ namespace EcobitStage.ViewModel
             }
         }
 
+        //private string _refreshdeletion;
+        //public string RefreshDeletion
+        //{
+        //    get
+        //    {
+        //        if (string.IsNullOrEmpty(_refreshdeletion))
+        //            return "Unknown";
+
+        //        return _refreshdeletion;
+        //    }
+        //    set
+        //    {
+        //        _refreshdeletion = value;
+        //        OnPropertyRaised("RefreshDeletion");
+        //    }
+        //}
+
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //private void OnPropertyRaised(string RefreshDeletion)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        Refresh();
+        //    }
+        //}
+               
         private List<DataViewModel.User> _users = new List<DataViewModel.User>();
         private List<DataViewModel.Privilege> _privileges = new List<DataViewModel.Privilege>();
         private List<DataViewModel.UserPrivilege> _userprivileges = new List<DataViewModel.UserPrivilege>();
@@ -253,7 +280,7 @@ namespace EcobitStage.ViewModel
         }
 
         //Refresh all lists
-        private void Refresh()
+        public void Refresh()
         {
             _userprivileges.Clear();
             ObservableUserPrivileges.Clear();
@@ -269,9 +296,9 @@ namespace EcobitStage.ViewModel
                     _userprivileges.Add(newUP);
                     ObservableUserPrivileges.Add(newUP);
                 }
-            }
             RefreshPrivileges();
             RefreshUsers();
+            }
         }
 
         #region Nested refreshes

@@ -3,13 +3,14 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
 namespace EcobitStage.ViewModel
 {
-    public class UserViewModel : ViewModelBase
+    public class UserViewModel : ViewModelBase, INotifyPropertyChanged
     {
         #region Commands
 
@@ -20,7 +21,7 @@ namespace EcobitStage.ViewModel
         public ICommand NewCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-
+        private UserPrivilegeViewModel UPVM;
         #endregion Commands
 
         private string _searchQuery;
@@ -37,13 +38,14 @@ namespace EcobitStage.ViewModel
                 RaisePropertyChanged("SearchQuery");
             }
         }
-
+ 
         public DataViewModel.User SelectedUser { get; set; }
         private List<DataViewModel.User> _users = new List<DataViewModel.User>();
         public ObservableCollection<DataViewModel.User> ObservableUsers { get; set; }
 
-        public UserViewModel()
+        public UserViewModel(UserPrivilegeViewModel upvm)
         {
+            UPVM = upvm;
             Initialize();
         }
 
@@ -147,6 +149,8 @@ namespace EcobitStage.ViewModel
                     var user = context.User.Where(u => u.ID == SelectedUser.ID).FirstOrDefault();
                     context.User.Remove(user);
                     context.SaveChanges();
+                    UPVM.Refresh();
+
                 }
                 ObservableUsers.Remove(SelectedUser);
                 SelectedUser = null;
@@ -173,5 +177,6 @@ namespace EcobitStage.ViewModel
                 }
             }
         }
+
     }
 }
