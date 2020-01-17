@@ -244,7 +244,6 @@
     <Resource Include="View\Repo\Form.png" />
     <Resource Include="View\Repo\Logout.png" />
     <Resource Include="View\Repo\Privilege.png" />
-    <Resource Include="View\Repo\programIcon.png" />
     <Resource Include="View\Repo\User.png" />
     <Resource Include="View\Repo\UserPrivilege.png" />
   </ItemGroup>
@@ -255,18 +254,10 @@
     <Resource Include="View\Repo\icon_ecobit_large.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Repo\Filter_White.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Repo\Remove_Filter_Black.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="View\Repo\Remove_Filter_Black_WB.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Repo\Filter_Black_G.png" />
-    <Resource Include="View\Repo\Filter_Black_O.png" />
-    <Resource Include="View\Repo\Filter_Black_R.png" />
+    <Resource Include="View\Repo\Filter_White.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

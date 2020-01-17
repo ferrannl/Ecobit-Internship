@@ -129,7 +129,7 @@ namespace EcobitStage.ViewModel
         //delete function
         private void Delete()
         {
-            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " en bijbehorende Toegankelijkheden verwijderen?",
+            if (MessageBox.Show("Wil je " + SelectedUser.FullName + " en bijbehorende Gebruiker Toegankelijkheden verwijderen?",
             "Verwijderen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 using (var context = new EcobitDBEntities())

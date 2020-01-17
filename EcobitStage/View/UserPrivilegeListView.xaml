@@ -7,12 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="UserPrivilegeList"
-    MinWidth="575"
-    MinHeight="280"
+    d:DesignHeight="450"
+    d:DesignWidth="600"
     DataContext="{Binding UserPrivilegeList, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    <Border BorderThickness="10">
-        <StackPanel>
+    <Border BorderThickness="15">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="600*" />
@@ -46,7 +46,7 @@
             <StackPanel>
                 <DockPanel Margin="0,5,0,5">
                     <TextBox
-                        MinWidth="150"
+                        MinWidth="200"
                         VerticalContentAlignment="Center"
                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.InputBindings>
@@ -92,111 +92,118 @@
                         FlowDirection="LeftToRight"
                         Orientation="Horizontal">
                         <Button
-                            Width="20"
-                            Height="20"
+                            Width="24"
+                            Height="24"
                             Background="Green"
-                            BorderBrush="Green"
-                            Command="{Binding IsNotOverDateCommand}">
+                            BorderThickness="0.2"
+                            Command="{Binding IsNotOverDateCommand}"
+                            Opacity="0.8"
+                            UseLayoutRounding="True">
                             <Image Source="/View/Repo/Filter_White.png" />
                         </Button>
                         <Button
-                            Width="20"
-                            Height="20"
+                            Width="24"
+                            Height="24"
                             Margin="4,0,4,0"
                             Background="Orange"
-                            BorderBrush="Orange"
-                            Command="{Binding IsAlmostOverDateCommand}">
+                            BorderThickness="0.2"
+                            Command="{Binding IsAlmostOverDateCommand}"
+                            Opacity="0.8"
+                            UseLayoutRounding="True">
                             <Image Source="/View/Repo/Filter_White.png" />
                         </Button>
                         <Button
-                            Width="20"
-                            Height="20"
+                            Width="24"
+                            Height="24"
                             Background="Red"
-                            BorderBrush="Red"
-                            Command="{Binding IsOverDateCommand}">
+                            BorderThickness="0.2"
+                            Command="{Binding IsOverDateCommand}"
+                            Opacity="0.8"
+                            UseLayoutRounding="True">
                             <Image Source="/View/Repo/Filter_White.png" />
                         </Button>
                     </StackPanel>
                 </DockPanel>
-                <DataGrid
-                    Height="300"
-                    AutoGenerateColumns="False"
-                    Background="White"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserResizeColumns="False"
-                    HeadersVisibility="Column"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding ObservableUserPrivileges}"
-                    SelectedItem="{Binding SelectedUserPrivilege}"
-                    SelectionMode="Single">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="120*"
-                            Binding="{Binding Fullname}"
-                            Header="Gebruiker" />
-                        <DataGridTextColumn
-                            Width="120*"
-                            Binding="{Binding Email}"
-                            Header="Email" />
-                        <DataGridTextColumn
-                            Width="120*"
-                            Binding="{Binding Privilege_Name}"
-                            Header="Toegankelijkheid" />
-                        <DataGridTextColumn
-                            Width="120*"
-                            Binding="{Binding _StartDate}"
-                            Header="Start Datum" />
-                        <DataGridTextColumn
-                            Width="120*"
-                            Binding="{Binding _EndDate}"
-                            Header="Eind Datum">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsOverDate}" Value="True">
-                                            <Setter Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Opacity="0.4" Color="Red" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsAlmostOverDate}" Value="True">
-                                            <Setter Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Opacity="0.4" Color="Orange" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsNotOverDate}" Value="true">
-                                            <Setter Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Opacity="0.4" Color="Green" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="26"
-                                        Height="26"
-                                        Background="Crimson"
-                                        BorderBrush="Crimson"
-                                        BorderThickness="0"
-                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        Content="❌"
-                                        FontSize="15"
-                                        Foreground="White" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid>
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        Background="White"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeColumns="False"
+                        HeadersVisibility="Column"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding ObservableUserPrivileges}"
+                        SelectedItem="{Binding SelectedUserPrivilege}"
+                        SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="120*"
+                                Binding="{Binding Fullname}"
+                                Header="Gebruiker" />
+                            <DataGridTextColumn
+                                Width="140*"
+                                Binding="{Binding Email}"
+                                Header="Email" />
+                            <DataGridTextColumn
+                                Width="100*"
+                                Binding="{Binding Privilege_Name}"
+                                Header="Toegankelijkheid" />
+                            <DataGridTextColumn
+                                Width="80*"
+                                Binding="{Binding _StartDate}"
+                                Header="Start Datum" />
+                            <DataGridTextColumn
+                                Width="80*"
+                                Binding="{Binding _EndDate}"
+                                Header="Eind Datum">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsOverDate}" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.4" Color="Red" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsAlmostOverDate}" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.4" Color="Orange" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsNotOverDate}" Value="true">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Opacity="0.4" Color="Green" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Width="26"
+                                            Height="26"
+                                            Background="Crimson"
+                                            BorderBrush="Crimson"
+                                            BorderThickness="0"
+                                            Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            Content="❌"
+                                            FontSize="15"
+                                            Foreground="White" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </StackPanel>
         </StackPanel>
     </Border>
