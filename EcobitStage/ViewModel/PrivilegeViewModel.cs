@@ -133,7 +133,10 @@ namespace EcobitStage.ViewModel
                     foreach (UserPrivilege ups in list)
                     {
                         var userprivilege = context.UserPrivilege.Where(up => up.Privilege_Name == SelectedPrivilege.Name).FirstOrDefault();
-                        context.UserPrivilege.Remove(userprivilege);
+                        if (userprivilege != null)
+                        {
+                            context.UserPrivilege.Remove(userprivilege);
+                        }
                     }
 
                     var privilege = context.Privilege.Where(p => p.Name == SelectedPrivilege.Name).FirstOrDefault();
