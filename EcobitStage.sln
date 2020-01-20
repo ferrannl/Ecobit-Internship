@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecobit.Domain", "Ecobit.Dom
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Ecobit.Database", "Ecobit.Database\Ecobit.Database.sqlproj", "{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "User_Privilege_Management_System_setup", "User_Privilege_Management_System_setup\User_Privilege_Management_System_setup.vdproj", "{F53B15CB-1AB7-48A3-8FB2-03D5AA727B67}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +29,6 @@ Global
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F3C7538-03BB-4AE7-849A-78B1FFE9F69F}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F53B15CB-1AB7-48A3-8FB2-03D5AA727B67}.Debug|Any CPU.ActiveCfg = Debug
-		{F53B15CB-1AB7-48A3-8FB2-03D5AA727B67}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
