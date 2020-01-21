@@ -34,6 +34,7 @@ namespace EcobitStage.ViewModel.DataViewModel
         internal bool Validate()
         {
             bool canSave = true;
+
             UserFeedback = "";
 
             if (string.IsNullOrWhiteSpace(FirstName))
@@ -41,13 +42,10 @@ namespace EcobitStage.ViewModel.DataViewModel
                 UserFeedback += "\r\n Het veld `Voornaam` is vereist.";
                 canSave = false;
             }
-            else if (Regex.IsMatch(FirstName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$"))
-            {
-                canSave = true;
-            }
-            else
+            else if (!Regex.IsMatch(FirstName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]+$"))
             {
                 UserFeedback += "\r\n Het veld `Voornaam` is niet valide.";
+                canSave = false;
             }
 
             if (string.IsNullOrWhiteSpace(LastName))
@@ -55,13 +53,10 @@ namespace EcobitStage.ViewModel.DataViewModel
                 UserFeedback += "\r\n Het veld `Achternaam` is vereist.";
                 canSave = false;
             }
-            else if (Regex.IsMatch(LastName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$"))
-            {
-                canSave = true;
-            }
-            else
+            else if (!Regex.IsMatch(LastName, @"^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]+$"))
             {
                 UserFeedback += "\r\n Het veld `Achternaam` is niet valide.";
+                canSave = false;
             }
 
             if (string.IsNullOrWhiteSpace(Email))
@@ -69,11 +64,7 @@ namespace EcobitStage.ViewModel.DataViewModel
                 UserFeedback += "\r\n Het veld `Email` is vereist.";
                 canSave = false;
             }
-            else if (Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
-            {
-                canSave = true;
-            }
-            else
+            else if (!Regex.IsMatch(Email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
                 UserFeedback += "\r\n Het veld `Email` is niet valide.";
                 canSave = false;

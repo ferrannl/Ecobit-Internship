@@ -74,6 +74,7 @@
                 DockPanel.Dock="Top"
                 NavigationUIVisibility="Hidden"
                 Source="{Binding CurrentPage}" />
+            <Image Source="View/Repo/ecobitlogo.png" />
             <TextBlock
                 Padding="2"
                 HorizontalAlignment="Right"

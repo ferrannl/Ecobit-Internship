@@ -259,6 +259,9 @@
   <ItemGroup>
     <Resource Include="View\Repo\Filter_White.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Repo\ecobitlogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
